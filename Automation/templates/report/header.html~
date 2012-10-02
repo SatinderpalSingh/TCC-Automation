@@ -1,0 +1,14 @@
+<html>
+<body>
+{% if Head %}
+	{% for Heads in Head %}
+	<p><a align="left">No.GNDEC/TCC/R/{{Heads.refrence_no}}</a><a align="right">Dated{{Heads.dispatch_report_date}}</a></p>
+	<p>To,</p>
+	<p><b>Subject:</b><a style="padding-left:30px; position:absolute">{{Heads.subject}}</a></p>
+	<p><b>Refrence:</b><a style="padding-left:17px; margin-bottom:0;">Your letter No. {{Heads.reference}}</a></p>
+	<p>Sir,</p>
+	<p style="padding-left:85px; margin-top:0; margin-bottom:0;">The result of  sent by you on {{Heads.date_of_testing}} are as under:</p>	
+	{% endfor  %}
+{% endif %}
+</body>	
+</html>

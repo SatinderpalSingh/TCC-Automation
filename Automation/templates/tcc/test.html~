@@ -1,0 +1,60 @@
+
+{% load i18n %}
+<html>
+<head>
+    <title>gne</title>
+</head>
+{% block content %}
+<div align="center"><h2>Catalog</h2></div>
+<br/>
+<div align="left"><table>
+	<tr><td><b>S.No</b></td>
+		<td> </td>
+		<td> </td>
+		<td><b>Materials</b></td>
+ 	</tr>
+
+{% if field %}
+    {% for fields in field %}	
+		
+	<tr>
+			<td>{{forloop.counter}}</td>
+			<td> </td>
+			<td> </td>
+			<td> <a href="{{ LOCAL_URL }}/automation/tcc11_12/rate/?id={{ fields.id }}" >{{fields.name}}</a> </td>
+</tr>
+	{% endfor %}
+{% endif %}</table>
+<div align="center"><table>	<tr>
+		<td><b>S.No</b></td>
+		<td> </td>
+		<td> </td>
+		<td><b>Test for {{material.name}}</b></td>
+		<td> </td>
+		<td> </td>
+		<td><b>Quantity</b></td>
+		<td> </td>
+		<td> </td>
+		<td><b>Cost</b></td>
+		
+ 	</tr>
+{% if test %}
+    {% for tests in test %}
+	<tr>
+			<td>{{ forloop.counter}}</td>
+			<td> </td>
+			<td> </td>
+			<td>{{tests.name}}</a> </td>
+			<td> </td>
+			<td> </td>
+			<td>{{tests.quantity}} {{tests.unit}}</a> </td>
+			<td> </td>
+			<td> </td>
+			<td>{{tests.cost}}</a> </td>
+</tr>
+        {% endfor %}
+{%endif %}
+</table> </div>
+
+</html>
+{% endblock %}

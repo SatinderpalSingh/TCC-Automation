@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+<html>
+<head>
+    <title>Gndec Ludhiana</title>
+</head>
+{% block content %}
+<body>
+Thanks, for Adding report <br/>
+
+	Date of testing :{{date_of_testing}}
+	
+<br/><br/>
+
+	
+</table>
+
+
+</body>
+{% endblock %}
