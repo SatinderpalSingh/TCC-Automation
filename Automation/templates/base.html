@@ -6,6 +6,10 @@
 <head>
     <link rel="stylesheet" href="http://localhost/style1.css" />
     <title>{% block title %}User test{% endblock %}</title>
+	{% block javascript %}
+        {{ block.super }}
+       <script type="text/javascript" src="http://localhost/add_row.js"></script>
+    {% endblock %}
 </head>
 
 <body>

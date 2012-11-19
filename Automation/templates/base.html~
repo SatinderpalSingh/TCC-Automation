@@ -6,6 +6,10 @@
 <head>
     <link rel="stylesheet" href="http://localhost/style1.css" />
     <title>{% block title %}User test{% endblock %}</title>
+	{% block javascript %}
+        {{ block.super }}
+       <script type="text/javascript" src="http://localhost/add_row.js"></script>
+    {% endblock %}
 </head>
 
 <body>
@@ -19,7 +23,7 @@
 
 	{% if user.is_authenticated %}
 	{% trans "Logged in" %}: {{ user.username }} 
-	<a href="{% url auth_logout %}">{% trans "Log out" %}</a> | 
+	(<a href="{% url auth_logout %}">{% trans "Log out" %}</a> | 
 	<a href="{% url auth_password_change %}">{% trans "Change password" %}</a>)
 	{% else %}
 	<a href="{% url auth_login %}">{% trans "Log in" %}</a>

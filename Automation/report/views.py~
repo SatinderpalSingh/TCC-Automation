@@ -10,7 +10,12 @@ from Automation.report.models import *
 from Automation.tcc.models import * 
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
-#	import pdb; pdb.set_trace()
+from django.forms.formsets import formset_factory, BaseFormSet
+from django.forms.models import modelformset_factory
+from django.forms.models import inlineformset_factory
+from django.core.context_processors import csrf
+from Automation.report.forms import *
+#import pdb; pdb.set_trace()
 
 ###################################
 # For generatin pdf from remplates#
@@ -283,7 +288,8 @@ def header(request):
 				form.save()
 				return HttpResponseRedirect(reverse('Automation.report.views.result'))
 				#return render_to_response('report/header.html', {'Head':Head,},context_instance=RequestContext(request))
-						
+			else:
+		        	return HttpResponse("There was an error with your submission. Please try again.")			
 		else:
 			form = headForm()
 			return render_to_response('report/report.html', {"form":form}, context_instance=RequestContext(request))
@@ -298,18 +304,111 @@ def result(request):
 #views for the model chem_analysis#
 ###################################
 def chemical_analysis(request):
+		ChemicalFormSet = modelformset_factory(chem_analysis)
+		job = ClientJob.objects.get(id=request.GET['id'])
 		if request.method=='POST':
-                	form = chem_analysisForm(request.POST)
-                	if form.is_valid():
-				cd = form.cleaned_data  
-				form.save()
-				chem = chem_analysis.objects.all()
-				#return HttpResponseRedirect(chem)
-				return render_to_response('report/chemical_analysis.html', {'chem': chem,},context_instance=RequestContext(request))
+                	formset = ChemicalFormSet(request.POST)
+                	if formset.is_valid():
+				cd = formset.cleaned_data  
+				profile = formset.save(commit=False)
+				profile.job_no=job
+				profile.save()
+				return HttpResponseRedirect(reverse('Automation.report.views.result_chem'))
+				#return render_to_response('report/chemical_analysis.html', {'chem': chem,},context_instance=RequestContext(request))
 			else:
 		        	return HttpResponse("There was an error with your submission. Please try again.")
 						
 		else:
-			form = chem_analysisForm()
-			return render_to_response('report/report.html', {"form":form}, context_instance=RequestContext(request))
+			formset = ChemicalFormSet()
+			#Id = chem_analysis.objects.aggregate(Max('id'))
+			#ID = Id['id__max']
+			#formset = chem_analysis.objects.filter(id = ID)
+		return render_to_response('report/report3.html', {'formset': formset}, context_instance=RequestContext(request))
 			
+def result_chem(request):
+	Id = chem_analysis.objects.aggregate(Max('id'))
+	ID = Id['id__max']
+	chem = chem_analysis.objects.filter(id = ID)
+	return render_to_response('report/chemical_analysis.html', {'chem': chem,},context_instance=RequestContext(request))
+'''
+
+def chemical_analysis(request):
+	if request.method=='POST':
+                	form = chem_analysisForm(request.POST)
+                	if form.is_valid():
+                	        cd = form.cleaned_data  
+				form.save()
+				return HttpResponseRedirect(reverse('Automation.report.views.result_chem'))
+			else:
+		        	return HttpResponse("There was an error with your submission. Please try again.")	
+	else:
+		form = chem_analysisForm()
+		return render_to_response('report/report1.html', {"form":form}, context_instance=RequestContext(request))
+		
+def result_chem(request):
+	Id = chem_analysis.objects.aggregate(Max('id'))
+	ID = Id['id__max']
+	chem = chem_analysis.objects.filter(id = ID)
+	return render_to_response('report/chemical_analysis.html', {'chem': chem,},context_instance=RequestContext(request))
+'''
+##########################
+#views for the model cube#
+##########################
+'''
+def cube_test(request):
+	if request.method=='POST':
+		form = cubeForm(request.POST)
+		if form.is_valid():
+			cd = form.cleaned_data
+			form.save()
+			return HttpResponseRedirect(reverse('Automation.report.views.result_cube'))
+		else:
+		       	return HttpResponse("There was an error with your submission. Please try again.")	
+	else:
+		form = cubeForm()
+		return render_to_response('report/report3.html', {"form":form}, context_instance=RequestContext(request))
+
+def result_cube(request):
+	Id = cube.objects.aggregate(Max('id'))
+	ID = Id['id__max']
+	cubee = cube.objects.filter(id = ID)
+	return render_to_response('report/cube.html', {'cubee':cubee,},context_instance=RequestContext(request))
+'''
+def index(request):
+    # This class is used to make empty formset forms required
+    # See http://stackoverflow.com/questions/2406537/django-formsets-make-first-required/4951032#4951032
+    class RequiredFormSet(BaseFormSet):
+        def __init__(self, *args, **kwargs):
+            super(RequiredFormSet, self).__init__(*args, **kwargs)
+            for form in self.forms:
+                form.empty_permitted = False
+
+    TodoItemFormSet = formset_factory(TodoItemForm, max_num=10, formset=RequiredFormSet)
+
+    if request.method == 'POST': # If the form has been submitted...
+        todo_list_form = TodoListForm(request.POST) # A form bound to the POST data
+        # Create a formset from the submitted data
+        todo_item_formset = TodoItemFormSet(request.POST, request.FILES)
+        
+        if todo_list_form.is_valid() and todo_item_formset.is_valid():
+            todo_list = todo_list_form.save()
+            for form in todo_item_formset.forms:
+                todo_item = form.save(commit=False)
+                todo_item.list = todo_list
+                todo_item.save()
+
+            return HttpResponseRedirect('thanks') # Redirect to a 'success' page
+    else:
+        todo_list_form = TodoListForm()
+        todo_item_formset = TodoItemFormSet()
+    
+    # For CSRF protection
+    # See http://docs.djangoproject.com/en/dev/ref/contrib/csrf/ 
+    c = {'todo_list_form': todo_list_form,
+         'todo_item_formset': todo_item_formset,
+        }
+    c.update(csrf(request))
+    
+    return render_to_response('report/index.html', c)
+
+

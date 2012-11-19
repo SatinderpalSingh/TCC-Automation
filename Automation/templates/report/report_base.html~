@@ -2,7 +2,10 @@
 <body>
 	<table width="100%">
 		<tr>
-			<td><b><center><b><center><a href="{{ LOCAL_URL }}/automation/report/soil_ohsr">soil_ohsr</a> </td>
+			<td><b><center><b><center><a href="{{ LOCAL_URL }}/automation/report/soil_ohsr">soil_ohsr</a></td>
+			<td><b><center><b><center><a href="{{ LOCAL_URL }}/automation/report/index">cube</a></td>
+			<td><b><center><b><center><a href="{{ LOCAL_URL }}/automation/report/header">header</a></td>
+			<td><b><center><b><center><a href="{{ LOCAL_URL }}/automation/report/chemical_analysis">chemical_analysis</a></td>
 		</tr>
 	</table>
 </body>
