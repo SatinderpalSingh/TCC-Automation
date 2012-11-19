@@ -16,7 +16,8 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.db.models import Max ,Q, Sum
 from django.forms.fields import DateField, ChoiceField, MultipleChoiceField
-from tagging.fields import TagField
+#from tagging.fields import TagField
+from Automation.report.models import *
 #from smart_selects.db_fields import ChainedForeignKey
 
 class Report(models.Model):
@@ -357,4 +358,16 @@ class Bankdetails(models.Model):
 	accountno = models.IntegerField(null=False)
 	accountcode = models.CharField(max_length=50)
 	address = models.CharField(max_length=150)
+'''
+################################
+#table for testing purpose only#
+################################
+class test(models.Model):
+#	head1 = models.ForeignKey(head)
+	test_column1 = models.CharField(max_length=255)
+	refrence_table = models.CharField(max_length=255)    
 
+class testForm(ModelForm):
+	class Meta :
+		model = test
+'''

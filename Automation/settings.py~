@@ -12,7 +12,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'automation2',                      # Or path to database file if using sqlite3.
+        'NAME': 'automation',                      # Or path to database file if using sqlite3.
         'USER': 'root',                      # Not used with sqlite3.
         'PASSWORD': 'q',
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -90,8 +90,6 @@ TEMPLATE_DIRS = ("/home/goraya/Automation/templates"
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
-
-
 
 INSTALLED_APPS = (
     'django.contrib.auth',

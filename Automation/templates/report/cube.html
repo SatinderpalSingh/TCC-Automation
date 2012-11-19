@@ -1,0 +1,24 @@
+<html>
+<body>
+{% if cubee %}
+
+	{% for test in cubee %}
+	{{test.id}}
+	<table align="center" border="1">
+		<tr>
+			<th>S.no</th>
+			<th>Description</th>
+			<th>Breaking_load</th>
+			<th>Comp_strength</th>
+		</tr>
+		<tr>
+			<td>{{test.name}}</td>	
+			<td>{{test.name}}</td>
+			<td>{{test.list}}</td>	
+			<td>{{test.comp_strength}}</td>		
+		</tr>	
+	</table>
+	{% endfor  %}
+{% endif %}
+</body>
+</html>

@@ -6,7 +6,10 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.db.models import Max ,Q, Sum
 from django.forms.fields import DateField, ChoiceField, MultipleChoiceField
-from Automation.tcc.models import ClientJob
+from Automation.tcc.models import *
+from django.forms.models import BaseModelFormSet  #for defining formset in models
+#from report.tests import SeparatedValuesField 	  #for storing array in the models
+import ast
 
 ################################
 #Input data model for SOIL OSHR#
@@ -91,25 +94,38 @@ class soil_ohsrForm(ModelForm):
 	class Meta :
 		model = soil_ohsr
 '''
-class soil(models.Model):
-    type_of_data = (
-        ('FR', 'Freshman'),
-        ('SO', 'Sophomore'),
-        ('JR', 'Junior'),
-        ('SR', 'Senior'),
-        ('GR', 'Graduate'),
-    )
-    year_in_school = models.CharField(max_length=2, choices=type_of_data)
+################################
+#table for testing purpose only#
+################################
+class Sr_no(models.Model):
+	no = models.IntegerField(max_length=12)
+	
+	def __unicode__(self):
+        	return self.no
 
-class soilForm(ModelForm):
-	class Meta :
-		model = soil
+class Description(models.Model):
+	field = models.CharField(max_length=12)
+	
+	def __unicode__(self):
+        	return self.field
 
+class Comp_strength(models.Model):
+	field = models.CharField(max_length=12)
+	
+	def __unicode__(self):
+        	return self.field
+
+class Breaking_load(models.Model):
+	load = models.CharField(max_length=12)
+	
+	def __unicode__(self):
+        	return self.load
 '''
 ###################################
 #header file for different reports#
 ###################################
 class head(models.Model):
+    #test1 = models.ForeignKey(test)
     refrence_no = models.CharField(max_length=255)    			#college reference letter no. 
     dispatch_report_date = models.CharField(max_length=255)		#report dispatch date, to the client
     date_of_testing = models.CharField(max_length=255)			#date on which test is performed	
@@ -130,17 +146,78 @@ class headForm(ModelForm):
 #report type cheical_analysis#        
 ##############################        
 class chem_analysis(models.Model):
-    job_no = models.ForeignKey(ClientJob)
-    s_no = models.CharField(max_length=255)
-    description = models.CharField(max_length=255)
-    result = models.CharField(max_length=255)
-#    headers = models.ForeignKey(head)
+#    job_no = models.ForeignKey(ClientJob)
+    s_no = models.CharField(max_length=255,blank=True)
+    description = models.CharField(max_length=255,blank=True)
+    result = models.CharField(max_length=255,blank=True)
     
     def __str__(self):
         return self.s_no
-        
-class chem_analysisForm(ModelForm):
+'''        
+class Basechem_analysisFormSet(BaseModelFormSet):
     class Meta :
         model = chem_analysis
-        
-                        
+'''
+
+class chem_analysisForm(ModelForm):
+	class Meta :
+		model = chem_analysis
+
+#######################
+#report type cube_test#
+#######################
+'''
+class ListField(models.TextField):
+    __metaclass__ = models.SubfieldBase
+    description = "Stores a python list"
+
+    def __init__(self, *args, **kwargs):
+        super(ListField, self).__init__(*args, **kwargs)
+
+    def to_python(self, value):
+        if not value:
+            value = []
+
+        if isinstance(value, list):
+            return value
+
+        return ast.literal_eval(value)
+
+    def get_prep_value(self, value):
+        if value is None:
+            return value
+
+        return unicode(value)
+
+    def value_to_string(self, obj):
+        value = self._get_val_from_obj(obj)
+        return self.get_db_prep_value(value)
+
+
+class cube(models.Model):
+	#test1 = models.ForeignKey(test)
+	#job_no = models.ForeignKey(ClientJob) 
+	s_no = ListField()
+	description = ListField()
+	breaking_load = models.CharField(max_length=255,blank=True)
+	comp_strength = models.CharField(max_length=255,blank=True)
+	
+	def __str__(self):
+		return self.s_no
+class cubeForm(ModelForm):
+	class Meta :
+		model = cube
+'''
+class TodoList(models.Model):
+    name = models.CharField(max_length=100)
+    
+    def __unicode__(self):
+        return self.name
+
+class TodoItem(models.Model):
+    name = models.CharField(max_length=150, help_text="")
+    list = models.ForeignKey(TodoList)
+    
+    def __unicode__(self):
+        return self.name + " (" + str(self.list) + ")"
+

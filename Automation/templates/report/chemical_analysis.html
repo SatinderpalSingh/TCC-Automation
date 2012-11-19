@@ -1,5 +1,22 @@
 <html>
 <body>
-	<p>this contains chemical analysis report</p>
+{% if chem %}
+
+	{% for chemical in chem %}
+	{{chemical.id}}
+	<table align="center" border="1">
+		<tr>
+			<th>S.no</th>
+			<th>Description</th>
+			<th>Result</th>
+		</tr>
+		<tr>
+			<td>{{chemical.s_no}}</td>	
+			<td>{{chemical.description}}</td>
+			<td>{{chemical.result}}</td>		
+		</tr>	
+	</table>
+	{% endfor  %}
+{% endif %}
 </body>
 </html>

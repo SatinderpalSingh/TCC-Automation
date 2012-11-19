@@ -91,8 +91,6 @@ TEMPLATE_DIRS = ("/home/goraya/Automation/templates"
     # Don't forget to use absolute paths, not relative paths.
 )
 
-
-
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -108,7 +106,7 @@ INSTALLED_APPS = (
     #'smart_selects',
     #'catalog',
     #'catalog.contrib.defaults',
-#    'cart',
+    #'cart',
 )
 
 
