@@ -1,21 +1,36 @@
+{% extends "report/report_header.html" %}
+{% load i18n %}
 <html>
+{% block content %}
 <body>
-{% if Head %}
-	{% for Heads in Head %}
-	<p><a align="left">No.GNDEC/TCC/R/{{Heads.refrence_no}}</a><a align="right">Dated{{Heads.dispatch_report_date}}</a></p>
-	<p><b>Job no:</b><a style="padding-left:30px; position:absolute">{{Heads.job_no}}</a></p>
-	<p>To,</p>
+{% for Heads in Head %}
+	<table   width="100%"><tr>
+	<td align="left"><a>No.GNDEC/TCC/R/{{Heads.refrence_no}}</td><td align="right"><a>Dated{{Heads.dispatch_report_date}}</a></td>
+	</tr></table>
+<!--	<p><b>Job no:</b><a style="padding-left:30px; position:absolute">{{Heads.job_no}}</a></p>
+-->	<p>To,</p>
 	<p><b>Subject:</b><a style="padding-left:30px; position:absolute">{{Heads.subject}}</a></p>
-	<p><b>Refrence:</b><a style="padding-left:17px; margin-bottom:0;">Your letter No. {{Heads.reference}}</a></p>
+	<p><b>Refrence:</b><a style="padding-left:17px; margin-bottom:0;">Your letter No. {{Heads.reference}} dated    {{Heads.dated}}</a></p>
 	<p>Sir,</p>
 	<p style="padding-left:85px; margin-top:0; margin-bottom:0;">The result of  sent by you on {{Heads.date_of_testing}} are as under:</p>	
-	{% endfor  %}
-{% endif %}
+{% endfor  %}
+<div id="report">
+	{% block report %}{% endblock %}
+</div>
 {% block footer %}
 	<h3>Conditions:</h3>
 	<p>1. This test report refers only to the samples submitted for the test.</p>
 	<p>2. This test report not be used for any sales promotions or advertisements without permission.</p>
-	<p>3. This test report is not to be used for legal purpose and will not be produce in the Caurt of Law.</p>
+	<p>3. This test report is not to be used for legal purpose and will not be produce in the Court of Law.</p>
+
+	<table span style="padding-left:100px; padding-right:100px" width="100%">
+		<tr>	
+			<td align="left"><h4>(Co-Ordinator)</h4></td>
+			<td align="right"><h4>Dean Testing & Consultancy<br/>Guru Nanak Dev Engg College<br/>Ludhiana</h4></td>
+		</tr>
+	</table>
 {% endblock %}
+<hr/>
 </body>	
 </html>
+{% endblock %}

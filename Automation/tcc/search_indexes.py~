@@ -1,6 +1,7 @@
 import datetime
 from haystack import indexes
-from TCC.automation.models import *
+from Automation.tcc.models import *
+
 
 class NoteIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)

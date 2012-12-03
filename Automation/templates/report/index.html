@@ -37,12 +37,14 @@ h2 {
   margin-bottom: 4px;
   padding: 5px 15px;
 }
+/*
 .column
 {
   border:1px;
   margin-bottom:4px;
   padding:5px 15px;
 }
+*/
 .helptext {
   color: #999;
   padding-left: 10px;
@@ -99,8 +101,8 @@ $(document).ready(function() {
   function addForm(btn, prefix) {
     var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
 
-    // You can only submit a maximum of 10 todo items 
-    if (formCount < 10) {
+    // You can only submit a maximum of 30 todo items 
+    if (formCount < 30) {
       // Clone a form (without event handlers) from the first form
       var row = $(".item:first").clone(false).get(0);
       // Insert it after the last form
@@ -149,12 +151,12 @@ $(document).ready(function() {
 </head>
 <body>
 
-<h1>CUBE TEST</h1>
-<h2>Customer Id</h2>
+<h1>TEST REPORT</h1>
+
 
 <form action="" method="POST">{% csrf_token %}
     <div class="section">
-        {{ todo_list_form.as_p }}
+        {{ report_form.as_p }}
     </div>
 
     <h2>Report</h2>
@@ -162,8 +164,88 @@ $(document).ready(function() {
     {{ todo_item_formset.management_form }}
     {% for form in todo_item_formset.forms %}
     <div class="item">
-	 {{ form.as_tcc }}
-      <p style=""><a class="delete" href="#">Delete</a></p>  
+		{{ form.as_p }}
+		<p style=""><a class="delete" href="#">Delete</a></p>  
+	</div>
+    {% endfor %}
+    {{ chem_analysis_formset.management_form }}
+    {% for form in chem_analysis_formset.forms %}
+    <div class="item">
+		{{ form.as_p }}
+		<p style=""><a class="delete" href="#">Delete</a></p>  
+	</div>
+    {% endfor %}
+
+    {{ water_formset.management_form }}
+    {% for form in water_formset.forms %}
+    <div class="item">
+		{{ form.as_p }}
+		<p style=""><a class="delete" href="#">Delete</a></p>  
+	</div>
+    {% endfor %}
+
+    {{ brick_formset.management_form }}
+    {% for form in brick_formset.forms %}
+    <div class="item">
+		{{ form.as_p }}
+		<p style=""><a class="delete" href="#">Delete</a></p>  
+	</div>
+    {% endfor %}
+
+    {{ Soil_ohsr_formset.management_form }}
+    {% for form in Soil_ohsr_formset.forms %}
+    <div class="item">
+		{{ form.as_p }}
+		<p style=""><a class="delete" href="#">Delete</a></p>  
+	</div>
+    {% endfor %}
+
+    {{ soil_building_formset.management_form }}
+    {% for form in soil_building_formset.forms %}
+    <div class="item">
+		{{ form.as_p }}
+		<p style=""><a class="delete" href="#">Delete</a></p>  
+	</div>
+    {% endfor %}
+
+    {{ Mixture_formset.management_form }}
+    {% for form in Mixture_formset.forms %}
+    <div class="item">
+		{{ form.as_p }}
+		<p style=""><a class="delete" href="#">Delete</a></p>  
+	</div>
+    {% endfor %}
+
+
+    {{ Cement_ppc_formset.management_form }}
+    {% for form in Cement_ppc_formset.forms %}
+    <div class="item">
+		{{ form.as_p }}
+		<p style=""><a class="delete" href="#">Delete</a></p>  
+	</div>
+    {% endfor %}
+
+    {{ Cement_opc_33_formset.management_form }}
+    {% for form in Cement_opc_33_formset.forms %}
+    <div class="item">
+		{{ form.as_p }}
+		<p style=""><a class="delete" href="#">Delete</a></p>  
+	</div>
+    {% endfor %}
+
+    {{ Cement_opc_43_formset.management_form }}
+    {% for form in Cement_opc_43_formset.forms %}
+    <div class="item">
+		{{ form.as_p }}
+		<p style=""><a class="delete" href="#">Delete</a></p>  
+	</div>
+    {% endfor %}
+
+    {{ Cement_opc_53_formset.management_form }}
+    {% for form in Cement_opc_53_formset.forms %}
+    <div class="item">
+		{{ form.as_p }}
+		<p style=""><a class="delete" href="#">Delete</a></p>  
 	</div>
     {% endfor %}
 

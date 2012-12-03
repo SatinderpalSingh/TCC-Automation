@@ -1,43 +1,57 @@
+{% extends "base.html" %}
+{% load i18n %}
 <html>
 <head>
     <title>gne</title>
+
 </head>
 {% block content %}
+<script>
+var selectedEl;
+document.onclick = function(evt)
+{
+    var el = window.event? event.srcElement : evt.target;
+    if (el && el.className == 'unselected')
+    {
+        
+        selectedEl.className = 'unselected';
+        
+        selectedEl = el;
+        
+        selectedEl.className = 'selected';
+    }
+}
+</script>
+<style>
+ .selected { background: #76B900; }
+</style>
 <div align="center"><h2>Catalog</h2></div>
-<div align="center"><h4>Tests for {{field.name}}</h4></div>
-<div align="left"><table>
+<br/>
+ <div id="leftnav" style=" float: left; width:auto;"> <table>
 	<tr><td><b>S.No</b></td>
 		<td> </td>
 		<td> </td>
-		<td><b>LAB</b></td>
+		<td><b>Materials</b></td>
  	</tr>
 
+{% if field %}
+    {% for fields in field %}	
+		
 	<tr>
-			<td>{{ lab.id}}</td>
+			<td>{{forloop.counter}}</td>
 			<td> </td>
 			<td> </td>
-			<td> <a href="{{ LOCAL_URL }}/automation/tcc11_12/field/?id={{ lab.id }}" >{{lab.name}}</a> </td>
- 	</tr></table></div>
-	 
-	<div align="center"><table><tr>
+			<td> <span class="unselected"><a href="/automation/tcc11_12/rate/?id={{ fields.id }}" class="changegreen">{{fields.name}}</a> </span></td>
+</tr>
+	{% endfor %}
+{% endif %}</table>
+</div> 
+  <div id="content" style="float: left; width: auto; position: absolute; right: 0px; left: 300px;"> 
+  <table >	<tr>
 		<td><b>S.No</b></td>
 		<td> </td>
 		<td> </td>
-		<td><b>Field</b></td>
- 	</tr>
-
-	<tr>
-			<td>{{ field.id}}</td>
-			<td> </td>
-			<td> </td>
-			<td> <a href="{{ LOCAL_URL }}/automation/tcc11_12/rate/?id={{ field.id }}" >{{field.name}}</a> </td>
-</tr></tr></table></div>
-	 
-<div align="right"><table>	<tr>
-		<td><b>S.No</b></td>
-		<td> </td>
-		<td> </td>
-		<td><b>Test</b></td>
+		<td><b>Test for <font color="#76B900">{{material.name}}</font></b></td>
 		<td> </td>
 		<td> </td>
 		<td><b>Quantity</b></td>
@@ -45,11 +59,11 @@
 		<td> </td>
 		<td><b>Cost</b></td>
 		
- 	</tr>
+ 	</tr></font>
 {% if test %}
     {% for tests in test %}
 	<tr>
-			<td>{{ tests.id}}</td>
+			<td>{{ forloop.counter}}</td>
 			<td> </td>
 			<td> </td>
 			<td>{{tests.name}}</a> </td>
@@ -66,3 +80,4 @@
 
 </html>
 {% endblock %}
+

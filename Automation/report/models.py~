@@ -11,11 +11,227 @@ from django.forms.models import BaseModelFormSet  #for defining formset in model
 #from report.tests import SeparatedValuesField 	  #for storing array in the models
 import ast
 
+'''
 ################################
-#Input data model for SOIL OSHR#
+#table for testing purpose only#
 ################################
+class Sr_no(models.Model):
+	no = models.IntegerField(max_length=12)
+	
+	def __unicode__(self):
+        	return self.no
 
-class soil_ohsr(models.Model):
+class Description(models.Model):
+	field = models.CharField(max_length=12)
+	
+	def __unicode__(self):
+        	return self.field
+
+class Comp_strength(models.Model):
+	field = models.CharField(max_length=12)
+	
+	def __unicode__(self):
+        	return self.field
+
+class Breaking_load(models.Model):
+	load = models.CharField(max_length=12)
+	
+	def __unicode__(self):
+        	return self.load
+'''
+###################################
+#header file for different reports#
+###################################
+class head(models.Model):
+    #test1 = models.ForeignKey(test)
+    refrence_no = models.CharField(max_length=255)    			#college reference letter no. 
+    dispatch_report_date = models.CharField(max_length=255)		#report dispatch date, to the client
+    date_of_testing = models.CharField(max_length=255)			#date on which test is performed	
+    subject = models.CharField(max_length=255)	
+    dated = models.CharField(max_length=255, blank=True)				
+    reference = models.CharField(max_length=255)			#client reference letter no.
+    column_1 = models.CharField(max_length=255,blank=True)
+    column_2 = models.CharField(max_length=255,blank=True)
+    column_3 = models.CharField(max_length=255,blank=True)
+    
+    def __str__(self):
+        return self.refrence_no
+        
+#######################
+#report type cube_test#
+#######################
+class Report(models.Model):
+    Head_id = models.ForeignKey(head)
+    Sample_no = models.CharField(max_length=100)
+    
+    def __unicode__(self):
+        return self.Sample_no + "(" + str(self.Head_id) + ")"
+
+class Cube(models.Model):
+    Report_id = models.ForeignKey(Report)
+    S_No = models.CharField(max_length=255,blank=True) 
+    Description = models.CharField(max_length=150, help_text="")
+    Breaking_load = models.CharField(max_length=150)
+    Mix = models.CharField(max_length=255,blank=True) 
+    Comp_strength = models.CharField(max_length=150, blank=True)
+    
+    def __unicode__(self):
+        return self.name + " (" + str(self.Report_id) + ")"
+
+##############################
+#report type cheical_analysis#        
+##############################        
+class Chem_analysis(models.Model):
+#    job_no = models.ForeignKey(ClientJob)
+    Report_id = models.ForeignKey(Report)
+    s_no = models.CharField(max_length=255,blank=True)
+    description = models.CharField(max_length=255,blank=True)
+    result = models.CharField(max_length=255,blank=True)
+    
+    def __unicode__(self):
+        return self.s_no + "(" + str(self.Report_id) + ")"
+
+#########################
+#Report Of Steel Samples#
+#########################
+class Steel(models.Model):
+	Report_id = models.ForeignKey(Report)
+	S_No = models.CharField(max_length=255,blank=True)  
+	Description_of_Test = models.CharField(max_length=255,blank=True)
+	Acceptable_limit_as_per = models.CharField(max_length=255,blank=True)
+	Result_1 = models.CharField(max_length=255,blank=True)
+	Result_2 = models.CharField(max_length=255,blank=True)
+	Result_3 = models.CharField(max_length=255,blank=True)
+	
+	def __unicode__(self):
+		return self.S_No + "(" + str(self.Report_id) + ")"
+
+########################
+#Report of Ground Water#
+########################
+class Ground_Water(models.Model):
+	Report_id = models.ForeignKey(Report)
+	S_No = models.CharField(max_length=255,blank=True)		
+	Result_1 = models.CharField(max_length=255,blank=True)
+	Result_2 = models.CharField(max_length=255,blank=True)
+	Result_3 = models.CharField(max_length=255,blank=True)
+
+	def __unicode__(self):
+		return self.S_No + "(" + str(self.Report_id) + ")"
+
+##########################
+#Report of Concrete Paver#
+##########################
+class Concrete_Paver(models.Model):
+	Report_id = models.ForeignKey(Report)
+	S_No = models.CharField(max_length=255,blank=True)		
+	Description = models.CharField(max_length=255,blank=True)
+	Thickness = models.CharField(max_length=255,blank=True)
+	Comp_Strength_MPa = models.CharField(max_length=255,blank=True)
+	 
+	def __unicode__(self):
+		return self.S_No + "(" + str(self.Report_id) + ")"
+
+###########################
+#Report of Interlock_Tiles#
+###########################
+class Interlock_Tiles(models.Model):
+	Report_id = models.ForeignKey(Report)
+	S_No = models.CharField(max_length=255,blank=True)		
+	Description = models.CharField(max_length=255,blank=True)
+	Thickness = models.CharField(max_length=255,blank=True)
+	Comp_Strength_MPa = models.CharField(max_length=255,blank=True)
+	 
+	def __unicode__(self):
+		return self.S_No + "(" + str(self.Report_id) + ")"
+
+######################
+#Report of PC Samples#
+######################
+class PC(models.Model):
+	Report_id = models.ForeignKey(Report)
+	S_No = models.CharField(max_length=255,blank=True)		
+	Description = models.CharField(max_length=255,blank=True)
+	Bitumen_Content = models.CharField(max_length=255,blank=True)
+	 
+	def __unicode__(self):
+		return self.S_No + "(" + str(self.Report_id) + ")"
+  
+##################################
+#Report of Rebound Hammer Testing# 
+##################################
+class Rebound_Hammer_Testing(models.Model):
+	Report_id = models.ForeignKey(Report)
+	S_No = models.CharField(max_length=255,blank=True)		
+	Location = models.CharField(max_length=255,blank=True)
+	Striking_Angle = models.CharField(max_length=255,blank=True)
+	Average_Rebound_No = models.CharField(max_length=255,blank=True)
+	Comp_Strength_MPa = models.CharField(max_length=255,blank=True)
+ 	 
+	def __unicode__(self):
+		return self.S_No + "(" + str(self.Report_id) + ")"
+
+########################
+#Report of Brick Sample#
+########################
+class Brick(models.Model):
+	Report_id = models.ForeignKey(Report)
+	S_No = models.CharField(max_length=255,blank=True)		
+	Comp_Strength = models.CharField(max_length=255,blank=True)
+	Water_Absorption = models.CharField(max_length=255,blank=True)
+	Efflorescence = models.CharField(max_length=255,blank=True)
+	Dimension_Test = models.CharField(max_length=255,blank=True)
+ 	 
+	def __unicode__(self):
+		return self.S_No + "(" + str(self.Report_id) + ")"
+
+###############################
+# Report of WATER/WASTE WATER #
+###############################
+class Water(models.Model):
+	Report_id = models.ForeignKey(Report)
+	PH_Value = models.CharField(max_length=255,blank=True)
+	Color = models.CharField(max_length=255,blank=True)
+	COD_Total = models.CharField(max_length=255,blank=True)
+	COD_Filtered = models.CharField(max_length=255,blank=True)
+	BOD5_Total = models.CharField(max_length=255,blank=True)
+	BOD5_Filtered = models.CharField(max_length=255,blank=True)
+	Sulphide = models.CharField(max_length=255,blank=True)
+	Sulphate = models.CharField(max_length=255,blank=True)
+	Alkalinity = models.CharField(max_length=255,blank=True)
+	Total_Suspended_Solids = models.CharField(max_length=255,blank=True)
+	Volatile_Suspended_Solids = models.CharField(max_length=255,blank=True)
+	Chloride_as_Cl = models.CharField(max_length=255,blank=True)
+	Nickel = models.CharField(max_length=255,blank=True)
+	Iron = models.CharField(max_length=255,blank=True)
+	Maganese = models.CharField(max_length=255,blank=True)
+	Copper = models.CharField(max_length=255,blank=True)
+	Hardness = models.CharField(max_length=255,blank=True)
+	Nitrates = models.CharField(max_length=255,blank=True)
+	Nitrites = models.CharField(max_length=255,blank=True)
+	Turbidity = models.CharField(max_length=255,blank=True)
+	Faecal_coliform = models.CharField(max_length=255,blank=True)
+	TDS = models.CharField(max_length=255,blank=True)
+	Taste_and_Odour = models.CharField(max_length=255,blank=True)
+	Calcium_and_Ca_Mg_per_l = models.CharField(max_length=255,blank=True)
+	Residual_Free_Chloride = models.CharField(max_length=255,blank=True)
+	Florides = models.CharField(max_length=255,blank=True)
+	Ammonia_Nitrogen = models.CharField(max_length=255,blank=True)
+	Total_Phosphorus = models.CharField(max_length=255,blank=True)
+	TKN = models.CharField(max_length=255,blank=True)	
+
+	def __unicode__(self):
+		return self.PH_Value + "(" + str(self.Report_id) + ")"
+
+#####################	
+# Report of BITUMEN #	
+#####################
+
+############################
+# data model for SOIL OSHR #
+############################
+class Soil_Ohsr(models.Model):
+	Report_id = models.ForeignKey(Report)
 	Date_of_testing = models.CharField(max_length=255)
 	Type_of_str = models.CharField(max_length=255)
 	Latitude_N = models.CharField(max_length=255,blank=True)
@@ -86,138 +302,219 @@ class soil_ohsr(models.Model):
 	S = models.CharField(max_length=255)
 	Value = models.CharField(max_length=255)
 	Net_Value = models.CharField(max_length=255)
-	
-#	def __str__(self):
-#		return self.date_of_testing
 
-class soil_ohsrForm(ModelForm):
-	class Meta :
-		model = soil_ohsr
-'''
-################################
-#table for testing purpose only#
-################################
-class Sr_no(models.Model):
-	no = models.IntegerField(max_length=12)
-	
 	def __unicode__(self):
-        	return self.no
+	        return self.Date_of_testing + "(" + str(self.Report_id) + ")"
 
-class Description(models.Model):
-	field = models.CharField(max_length=12)
-	
+###########################
+# Model for Soil_Building #
+###########################
+class Soil_Building(models.Model):
+	Report_id = models.ForeignKey(Report)
+	Date_of_Testing = models.CharField(max_length=100,blank=True)
+	Type_of_Str = models.CharField(max_length=100,blank=True)
+	Latitude_N = models.CharField(max_length=100,blank=True)
+	Longitude_E = models.CharField(max_length=100,blank=True)
+	Presence_1 = models.CharField(max_length=100,blank=True)
+	Presence_2 = models.CharField(max_length=100,blank=True)
+	Submitted_1 = models.CharField(max_length=100,blank=True)
+	Submitted_2 = models.CharField(max_length=100,blank=True)
+	Submitted_3 = models.CharField(max_length=100,blank=True)
+	Site_Name = models.CharField(max_length=100,blank=True)
+	Site_Name = models.CharField(max_length=100,blank=True)
+	Submitted_1 = models.CharField(max_length=100,blank=True)
+	Submitted_2 = models.CharField(max_length=100,blank=True)
+	Submitted_3 = models.CharField(max_length=100,blank=True)
+	Date_of_Testing = models.CharField(max_length=100,blank=True)
+	Presence_1 = models.CharField(max_length=100,blank=True)
+	Presence_2 = models.CharField(max_length=100,blank=True)
+	Type_of_Str = models.CharField(max_length=100,blank=True)
+	Wall_Dt = models.CharField(max_length=100,blank=True)
+	Wall_B = models.CharField(max_length=100,blank=True)
+	Col_Df = models.CharField(max_length=100,blank=True)
+	Col_L = models.CharField(max_length=100,blank=True)
+	Col_B = models.CharField(max_length=100,blank=True)
+	Gama_wall = models.CharField(max_length=100,blank=True)
+	Wall_C = models.CharField(max_length=100,blank=True)
+	Wall_Phay = models.CharField(max_length=100,blank=True)
+	Wall_Phay_Fe = models.CharField(max_length=100,blank=True)
+	Wall_Nc = models.CharField(max_length=100,blank=True)
+	Wall_Nq = models.CharField(max_length=100,blank=True)
+	Wall_Ny = models.CharField(max_length=100,blank=True)
+	Wall_Sc = models.CharField(max_length=100,blank=True)
+	Wall_Sq = models.CharField(max_length=100,blank=True)
+	Wall_Sy = models.CharField(max_length=100,blank=True)
+	Wall_dc = models.CharField(max_length=100,blank=True)
+	Wall_dq_dy = models.CharField(max_length=100,blank=True)
+	Wall_w = models.CharField(max_length=100,blank=True)
+	Gama_wall = models.CharField(max_length=100,blank=True)
+	Wall_peq = models.CharField(max_length=100,blank=True)
+	Wall_Total = models.CharField(max_length=100,blank=True)
+	Wall_T_2 = models.CharField(max_length=100,blank=True)
+	Col_Df = models.CharField(max_length=100,blank=True)
+	Col_L = models.CharField(max_length=100,blank=True)
+	Col_B = models.CharField(max_length=100,blank=True)
+	Col_Sc = models.CharField(max_length=100,blank=True)
+	Col_Sq = models.CharField(max_length=100,blank=True)
+	Col_Sy = models.CharField(max_length=100,blank=True)
+	Col_dc = models.CharField(max_length=100,blank=True)
+	Col_dq_dy = models.CharField(max_length=100,blank=True)
+	Col_peq = models.CharField(max_length=100,blank=True)
+	Col_Total = models.CharField(max_length=100,blank=True)
+	Col_T_2 = models.CharField(max_length=100,blank=True)
+	Dt_1 = models.CharField(max_length=100,blank=True)
+	Dt_2 = models.CharField(max_length=100,blank=True)
+	Dt_3 = models.CharField(max_length=100,blank=True)
+	Dt_4 = models.CharField(max_length=100,blank=True)
+	Dt_5 = models.CharField(max_length=100,blank=True)
+	Dt_6 = models.CharField(max_length=100,blank=True)
+	Dt_7 = models.CharField(max_length=100,blank=True)
+	Dt_8 = models.CharField(max_length=100,blank=True)
+	Ob_Pr_1 = models.CharField(max_length=100,blank=True) 
+	Ob_Pr_2 = models.CharField(max_length=100,blank=True)
+	Ob_Pr_3 = models.CharField(max_length=100,blank=True)
+	Ob_Pr_4 = models.CharField(max_length=100,blank=True)
+	Ob_Pr_5 = models.CharField(max_length=100,blank=True)
+	Ob_Pr_6 = models.CharField(max_length=100,blank=True)
+	Ob_Pr_7 = models.CharField(max_length=100,blank=True)
+	Ob_Pr_8 = models.CharField(max_length=100,blank=True)
+	Corr_F_1 = models.CharField(max_length=100,blank=True)
+	Corr_F_2 = models.CharField(max_length=100,blank=True)
+	Corr_F_3 = models.CharField(max_length=100,blank=True)
+	Corr_F_4 = models.CharField(max_length=100,blank=True)
+	Corr_F_5 = models.CharField(max_length=100,blank=True)
+	Corr_F_6 = models.CharField(max_length=100,blank=True)
+	Corr_F_7 = models.CharField(max_length=100,blank=True)
+	Corr_F_8 = models.CharField(max_length=100,blank=True)
+	Ob_N_V1 = models.CharField(max_length=100,blank=True)
+	Ob_N_V2 = models.CharField(max_length=100,blank=True)
+	Ob_N_V3 = models.CharField(max_length=100,blank=True)
+	Ob_N_V4 = models.CharField(max_length=100,blank=True)
+	Ob_N_V5 = models.CharField(max_length=100,blank=True)
+	Ob_N_V6 = models.CharField(max_length=100,blank=True)
+	Ob_N_V7 = models.CharField(max_length=100,blank=True)
+	Ob_N_V8 = models.CharField(max_length=100,blank=True)
+	Corr_N_V1 = models.CharField(max_length=100,blank=True)
+	Corr_N_V2 = models.CharField(max_length=100,blank=True)
+	Corr_N_V3 = models.CharField(max_length=100,blank=True)
+	Corr_N_V4 = models.CharField(max_length=100,blank=True)
+	Corr_N_V5 = models.CharField(max_length=100,blank=True)
+	Corr_N_V6 = models.CharField(max_length=100,blank=True)
+	Corr_N_V7 = models.CharField(max_length=100,blank=True)
+	Corr_N_V8 = models.CharField(max_length=100,blank=True)
+	Wall_Net_V = models.CharField(max_length=100,blank=True)
+	Wall_Value = models.CharField(max_length=100,blank=True)
+	Wall_G_V = models.CharField(max_length=100,blank=True)
+	Col_Value = models.CharField(max_length=100,blank=True)
+	Col_Net_V = models.CharField(max_length=100,blank=True)
+	Col_G_V = models.CharField(max_length=100,blank=True)
+	Col_N_V = models.CharField(max_length=100,blank=True)
+	Wall_N_V = models.CharField(max_length=100,blank=True)
+	Water_Table = models.CharField(max_length=100,blank=True)	
+
 	def __unicode__(self):
-        	return self.field
-
-class Comp_strength(models.Model):
-	field = models.CharField(max_length=12)
-	
-	def __unicode__(self):
-        	return self.field
-
-class Breaking_load(models.Model):
-	load = models.CharField(max_length=12)
-	
-	def __unicode__(self):
-        	return self.load
-'''
-###################################
-#header file for different reports#
-###################################
-class head(models.Model):
-    #test1 = models.ForeignKey(test)
-    refrence_no = models.CharField(max_length=255)    			#college reference letter no. 
-    dispatch_report_date = models.CharField(max_length=255)		#report dispatch date, to the client
-    date_of_testing = models.CharField(max_length=255)			#date on which test is performed	
-    subject = models.CharField(max_length=255)				
-    reference = models.CharField(max_length=255)			#client reference letter no.
-    column_1 = models.CharField(max_length=255,blank=True)
-    column_2 = models.CharField(max_length=255,blank=True)
-    column_3 = models.CharField(max_length=255,blank=True)
-    
-    def __str__(self):
-        return self.subject
-        
-class headForm(ModelForm):
-    class Meta :
-        model = head
-        
-##############################
-#report type cheical_analysis#        
-##############################        
-class chem_analysis(models.Model):
-#    job_no = models.ForeignKey(ClientJob)
-    s_no = models.CharField(max_length=255,blank=True)
-    description = models.CharField(max_length=255,blank=True)
-    result = models.CharField(max_length=255,blank=True)
-    
-    def __str__(self):
-        return self.s_no
-'''        
-class Basechem_analysisFormSet(BaseModelFormSet):
-    class Meta :
-        model = chem_analysis
-'''
-
-class chem_analysisForm(ModelForm):
-	class Meta :
-		model = chem_analysis
+	        return self.Date_of_testing + "(" + str(self.Report_id) + ")"
 
 #######################
-#report type cube_test#
+# Model for ADMIXTURE #
 #######################
-'''
-class ListField(models.TextField):
-    __metaclass__ = models.SubfieldBase
-    description = "Stores a python list"
+class Admixture(models.Model):
+	Report_id = models.ForeignKey(Report)
+	S_No = models.CharField(max_length=100,blank=True)
+	Physical_state = models.CharField(max_length=100,blank=True)	
+	Specific_Gravity = models.CharField(max_length=100,blank=True)	
+	PH_Value = models.CharField(max_length=100,blank=True)	
+	Dry_Material_Content = models.CharField(max_length=100,blank=True)	
+	Ash_Content = models.CharField(max_length=100,blank=True)	
+	Chloride_Content = models.CharField(max_length=100,blank=True)	
+	Control_Mix = models.CharField(max_length=100,blank=True)	
 
-    def __init__(self, *args, **kwargs):
-        super(ListField, self).__init__(*args, **kwargs)
+	def __unicode__(self):
+	        return self.S_No + "(" + str(self.Report_id) + ")"
 
-    def to_python(self, value):
-        if not value:
-            value = []
+###########################
+# Model for Cement Report #
+########################### 
 
-        if isinstance(value, list):
-            return value
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#
+# (PPC) IS 1489-1 & 2 Fly Ash Or Clay #
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#
+class Cement_PPC(models.Model):
+	Report_id = models.ForeignKey(Report)
+	Initial_Time = models.CharField(max_length=100,blank=True)		#Setting Time(Minutes) 
+	Final_Time = models.CharField(max_length=100,blank=True)
+	Fineness = models.CharField(max_length=100,blank=True)
+	Unaerated_Cement_Le = models.CharField(max_length=100,blank=True) 	#for Le-chat expansion(MM)
+	After_7_Days_Areation_Le = models.CharField(max_length=100,blank=True)
+	Unaerated_Cement_Auto = models.CharField(max_length=100,blank=True)	#for Auto Clave expansion(%)
+	After_7_Days_Areation_Auto = models.CharField(max_length=100,blank=True)	
+	Consistency = models.CharField(max_length=100,blank=True)	
+	Hours_72 = models.CharField(max_length=100,blank=True) 			#Compressive Strength(MPa)	
+	Hours_168 = models.CharField(max_length=100,blank=True)	
+	Hours_672 = models.CharField(max_length=100,blank=True)	
 
-        return ast.literal_eval(value)
+	def __unicode__(self):
+	        return self.Initial_Time + "(" + str(self.Report_id) + ")"
 
-    def get_prep_value(self, value):
-        if value is None:
-            return value
+#***********************#
+# (OPC) IS 269 33 GRADE #
+#***********************#
+class Cement_OPC_33(models.Model):
+	Report_id = models.ForeignKey(Report)
+	Initial_Time = models.CharField(max_length=100,blank=True)		#Setting Time(Minutes) 
+	Final_Time = models.CharField(max_length=100,blank=True)
+	Fineness = models.CharField(max_length=100,blank=True)
+	Unaerated_Cement = models.CharField(max_length=100,blank=True) 		#for Le-chat expansion(MM)
+	After_7_Days_Areation = models.CharField(max_length=100,blank=True)
+	Unaerated_Cement = models.CharField(max_length=100,blank=True)		#for Auto Clave expansion(%)
+	After_7_Days_Areation = models.CharField(max_length=100,blank=True)	
+	Consistency = models.CharField(max_length=100,blank=True)	
+	Hours_72 = models.CharField(max_length=100,blank=True) 			#Compressive Strength(MPa)	
+	Hours_168 = models.CharField(max_length=100,blank=True)	
+	Hours_672 = models.CharField(max_length=100,blank=True)	
 
-        return unicode(value)
-
-    def value_to_string(self, obj):
-        value = self._get_val_from_obj(obj)
-        return self.get_db_prep_value(value)
+	def __unicode__(self):
+	        return self.Initial_Time + "(" + str(self.Report_id) + ")"
 
 
-class cube(models.Model):
-	#test1 = models.ForeignKey(test)
-	#job_no = models.ForeignKey(ClientJob) 
-	s_no = ListField()
-	description = ListField()
-	breaking_load = models.CharField(max_length=255,blank=True)
-	comp_strength = models.CharField(max_length=255,blank=True)
-	
-	def __str__(self):
-		return self.s_no
-class cubeForm(ModelForm):
-	class Meta :
-		model = cube
-'''
-class TodoList(models.Model):
-    name = models.CharField(max_length=100)
-    
-    def __unicode__(self):
-        return self.name
+#************************#
+# (OPC) IS 8812 43 GRADE # 
+#************************#
+class Cement_OPC_43(models.Model):
+	Report_id = models.ForeignKey(Report)
+	Initial_Time = models.CharField(max_length=100,blank=True)		#Setting Time(Minutes) 
+	Final_Time = models.CharField(max_length=100,blank=True)
+	Fineness = models.CharField(max_length=100,blank=True)
+	Unaerated_Cement = models.CharField(max_length=100,blank=True) 		#for Le-chat expansion(MM)
+	After_7_Days_Areation = models.CharField(max_length=100,blank=True)
+	Unaerated_Cement = models.CharField(max_length=100,blank=True)		#for Auto Clave expansion(%)
+	After_7_Days_Areation = models.CharField(max_length=100,blank=True)	
+	Consistency = models.CharField(max_length=100,blank=True)	
+	Hours_72 = models.CharField(max_length=100,blank=True) 			#Compressive Strength(MPa)	
+	Hours_168 = models.CharField(max_length=100,blank=True)	
+	Hours_672 = models.CharField(max_length=100,blank=True)	
 
-class TodoItem(models.Model):
-    name = models.CharField(max_length=150, help_text="")
-    list = models.ForeignKey(TodoList)
-    
-    def __unicode__(self):
-        return self.name + " (" + str(self.list) + ")"
+	def __unicode__(self):
+	        return self.Initial_Time + "(" + str(self.Report_id) + ")"
+
+
+#*************************#
+# (OPC) IS 12269 53 GRADE #
+#*************************#
+class Cement_OPC_53(models.Model):
+	Report_id = models.ForeignKey(Report)
+	Initial_Time = models.CharField(max_length=100,blank=True)		#Setting Time(Minutes) 
+	Final_Time = models.CharField(max_length=100,blank=True)
+	Fineness = models.CharField(max_length=100,blank=True)
+	Unaerated_Cement = models.CharField(max_length=100,blank=True) 		#for Le-chat expansion(MM)
+	After_7_Days_Areation = models.CharField(max_length=100,blank=True)
+	Unaerated_Cement = models.CharField(max_length=100,blank=True)		#for Auto Clave expansion(%)
+	After_7_Days_Areation = models.CharField(max_length=100,blank=True)	
+	Consistency = models.CharField(max_length=100,blank=True)	
+	Hours_72 = models.CharField(max_length=100,blank=True) 			#Compressive Strength(MPa)	
+	Hours_168 = models.CharField(max_length=100,blank=True)	
+	Hours_672 = models.CharField(max_length=100,blank=True)	
+
+	def __unicode__(self):
+	        return self.Initial_Time + "(" + str(self.Report_id) + ")"
 

@@ -1,12 +1,10 @@
 {% extends "base.html" %}
 {% load i18n %}
 <html>
-<head>
-    <title>Gndec Ludhiana</title>
-</head>
-{% block content %}
 
+{% block content %}
 <br>
+<h1 class="changeBlue">Register a New Client</h1>
     {% if form.errors %}
         <p style="color: red;">
             Please correct the error{{ form.errors|pluralize }} below.

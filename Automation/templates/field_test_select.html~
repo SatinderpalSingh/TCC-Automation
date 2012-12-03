@@ -16,7 +16,7 @@ body { font:12px helvetica, arial, sans-serif; }
 $(function(){
 
 	$("#field").relatedSelects({
-		onChangeLoad: 'datasupplier.py',
+		onChangeLoad: 'datasupplier.php',
 		defaultOptionText: 'Choose an Option',
 		selects: {
 			'material':	{loadingMessage:'Loading Tests...' },
@@ -32,7 +32,7 @@ $(function(){
 
 <h2>Select tests</h2>
 
-<form action="" method="post" accept-charset="utf-8" id=field>
+<form action="" method="post" accept-charset="utf-8" id="field">
     <select name="material" >
         <option value="{{ material.id}}">Select a Material</option>
         {% for material in material_list %}

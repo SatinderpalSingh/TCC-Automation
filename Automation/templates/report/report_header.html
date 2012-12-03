@@ -7,37 +7,30 @@
     <title>{% block title %}GNDEC{% endblock %}</title>
 </head>
 <body>
-<div id="header">
-{% block header %}
-      
-		    {% for organisation in organisation %}
-                    <h1 align="center" style="margin-bottom:0;" >{{organisation.name}}</h1>
-                    <h3 align="center" style="margin-top:0; margin-bottom:0;">{{organisation.address}}</h3>
-		    <h4 align="center" style="margin-top:0; margin-bottom:0;">{{organisation.accrediatoin}}</h4>
+<div id="sidebar">
+        {% block header %}
+		    {% for organisations in organisation %}
+                    <h1 align="center" style="margin-bottom:0;" >{{organisations.name}}</h1>
+                    <h3 align="center" style="margin-top:0; margin-bottom:0;">{{organisations.address}}</h3>
+		    <h4 align="center" style="margin-top:0; margin-bottom:0;">{{organisations.accrediatoin}}</h4>
 		    <table width="100%" style="margin-top:0;">
 		    	<tr>
-		     		<td align="left">e-mail:{{organisation.e_mail}}</td>
-		    		<td align="center">Fax: {{organisation.fax}}</td>
-		    		<td align="right">Phone: {{organisation.phone}}</td>
+		     		<td align="left">e-mail:{{organisations.e_mail}}</td>
+		    		<td align="center">Fax: {{organisations.fax}}</td>
+		    		<td align="right">Phone: {{organisations.phone}}</td>
                     	</tr>
                     </table>
 <hr/>
 <!--                        <div>{{organisations.director}}</div>
--->			<div>{{organisation.logo_upload}}</div>
-			
-                   
+			<div>{{organisations.logo_upload}}</div>
+-->			
        		   {% endfor %}
-	
-	
-{% endblock %}
 </div>	
-	
-
-<div id="footer">
-        {% block footer %}
-        <hr/>
-        {% endblock %}
+{% endblock %}
+{% block columnwrap %}
+<div id="content">
+{% block content %}{% endblock %}
 </div>
-            
+{% endblock %}
 </body>
 </html>

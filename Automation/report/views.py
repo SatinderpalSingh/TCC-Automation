@@ -25,7 +25,7 @@ import ho.pisa as pisa
 from django.template.loader import get_template
 from django.template import Context
 from cgi import escape
-from Automation.report.models import soil_ohsr
+#from Automation.report.models import soil_ohsr
 #################################################
 
 '''
@@ -112,164 +112,59 @@ def render_to_pdf(template_src, context_dict):
 		return HttpResponse(result.getvalue(), mimetype='application/pdf')
 	return HttpResponse('We had some errors<pre>%s</pre>' % escape(html))
 
-
+#####################
+#Report of SOIL OHSR#
+#####################
 def soil_ohsr(request):
-	if request.method=='POST':
-		form = soil_ohsrForm(request.POST)
-  		if form.is_valid():
-			cd = form.cleaned_data
-			Date_of_testing = cd['Date_of_testing']
-			Type_of_str = cd['Type_of_str']
-			Latitude_N = cd['Latitude_N']
-			Longitude_E = cd['Longitude_E']
-			Presence_1 = cd['Presence_1']
-			Presence_2 = cd['Presence_2']
-			Submitted_1 = cd['Submitted_1']
-			Submitted_2 = cd['Submitted_2']
-			Submitted_3 = cd['Submitted_3']
-			Site_name = cd['Site_name']
-			Water_table = cd['Water_table']
-			Depth_D = cd ['Depth_D']
-			Diameter_B = cd['Diameter_B']
-			Gama_G = cd['Gama_G']
-			C = cd['C']
-			Phay = cd['Phay']
-			Phay_fe = cd['Phay_fe']
-			Nc = cd['Nc']
-			Nq = cd['Nq']
-			Ny = cd['Ny']
-			dc = cd['dc']
-			dqdy = cd['dqdy']
-			Water = cd['Water']
-			Pulse_Pulse = cd['Pulse_Pulse']
-			Eq_Total = cd['Eq_Total']
-			Total_Dby_2 = cd['Total_Dby_2']
-			Dt_1 = cd['Dt_1']
-			Dt_2 = cd['Dt_2']
-			Dt_3 = cd['Dt_3']
-			Dt_4 = cd['Dt_4']
-			Dt_5 = cd['Dt_5']
-			Dt_6 = cd['Dt_6']
-			Dt_7 = cd['Dt_7']
-			Dt_8 = cd['Dt_8']
-			Ob_Pr_1 = cd['Ob_Pr_1']
-			Ob_Pr_2 = cd['Ob_Pr_2']
-			Ob_Pr_3 = cd['Ob_Pr_3']
-			Ob_Pr_4 = cd['Ob_Pr_4']
-			Ob_Pr_5 = cd['Ob_Pr_5']
-			Ob_Pr_6 = cd['Ob_Pr_6']
-			Ob_Pr_7 = cd['Ob_Pr_7']
-			Ob_Pr_8 = cd['Ob_Pr_8']
-			Corr_F_1 = cd['Corr_F_1']
-			Corr_F_2 = cd['Corr_F_2']
-			Corr_F_3 = cd['Corr_F_3']
-			Corr_F_4 = cd['Corr_F_4']
-			Corr_F_5 = cd['Corr_F_5']
-			Corr_F_6 = cd['Corr_F_6']
-			Corr_F_7 = cd['Corr_F_7']
-			Corr_F_8 = cd['Corr_F_8']
-			Ob_N_V1 = cd['Ob_N_V1']
-			Ob_N_V2 = cd['Ob_N_V2']
-			Ob_N_V3 = cd['Ob_N_V3']
-			Ob_N_V4 = cd['Ob_N_V4']
-			Ob_N_V5 = cd['Ob_N_V5']
-			Ob_N_V6 = cd['Ob_N_V6']
-			Ob_N_V7 = cd['Ob_N_V7']
-			Ob_N_V8 = cd['Ob_N_V8']
-			Corr_N_V1 = cd['Corr_N_V1']
-			Corr_N_V2 = cd['Corr_N_V2']
-			Corr_N_V3 = cd['Corr_N_V3']
-			Corr_N_V4 = cd['Corr_N_V4']
-			Corr_N_V5 = cd['Corr_N_V5']
-			Corr_N_V6 = cd['Corr_N_V6']
-			Corr_N_V7 = cd['Corr_N_V7']
-			Corr_N_V8 = cd['Corr_N_V8']
-			N_Value = cd['N_Value']
-			S = cd['S']
-			Value = cd['Value']
-			Net_Value = cd['Net_Value']
-			form.save()
-			return render_to_response('report/soil_ohsr.html', {'form': form,
-#			return render_to_pdf(
-#				'report/report_pdf.html',
-#				{
-#				'pagesize':'A4',
-#                		'mylist':soil_ohsr,
-'Date_of_testing':Date_of_testing,
-'Type_of_str':Type_of_str,
-'Latitude_N':Latitude_N,
-'Longitude_E':Longitude_E,
-'Presence_1':Presence_1,
-'Presence_2':Presence_2,
-'Submitted_1':Submitted_1,
-'Submitted_2':Submitted_2,
-'Submitted_3':Submitted_3,
-'Site_name':Site_name,
-'Water_table':Water_table,
-'Depth_D':Depth_D,
-'Diameter_B':Diameter_B,
-'Gama_G':Gama_G,
-'C':C,
-'Phay':Phay,
-'Phay_fe':Phay_fe,
-'Nc':Nc,
-'Nq':Nq,
-'Ny':Ny,
-'dc':dc,
-'dqdy':dqdy,
-'Water':Water,
-'Pulse_Pulse':Pulse_Pulse,
-'Eq_Total':Eq_Total,
-'Total_Dby_2':Total_Dby_2,
-'Dt_1':Dt_1,
-'Dt_2':Dt_2,
-'Dt_3':Dt_3,
-'Dt_4':Dt_4,
-'Dt_5':Dt_5,
-'Dt_6':Dt_6,
-'Dt_7':Dt_7,
-'Dt_8':Dt_8,
-'Ob_Pr_1':Ob_Pr_1,
-'Ob_Pr_2':Ob_Pr_2,
-'Ob_Pr_3':Ob_Pr_3,
-'Ob_Pr_4':Ob_Pr_4,
-'Ob_Pr_5':Ob_Pr_5,
-'Ob_Pr_6':Ob_Pr_6,
-'Ob_Pr_7':Ob_Pr_7,
-'Ob_Pr_8':Ob_Pr_8,
-'Corr_F_1':Corr_F_1,
-'Corr_F_2':Corr_F_2,
-'Corr_F_3':Corr_F_3,
-'Corr_F_4':Corr_F_4,
-'Corr_F_5':Corr_F_5,
-'Corr_F_6':Corr_F_6,
-'Corr_F_7':Corr_F_7,
-'Corr_F_8':Corr_F_8,
-'Ob_N_V1':Ob_N_V1,
-'Ob_N_V2':Ob_N_V2,
-'Ob_N_V3':Ob_N_V3,
-'Ob_N_V4':Ob_N_V4,
-'Ob_N_V5':Ob_N_V5,
-'Ob_N_V6':Ob_N_V6,
-'Ob_N_V7':Ob_N_V7,
-'Ob_N_V8':Ob_N_V8,
-'Corr_N_V1':Corr_N_V1,
-'Corr_N_V2':Corr_N_V2,
-'Corr_N_V3':Corr_N_V3,
-'Corr_N_V4':Corr_N_V4,
-'Corr_N_V5':Corr_N_V5,
-'Corr_N_V6':Corr_N_V6,
-'Corr_N_V7':Corr_N_V7,
-'Corr_N_V8':Corr_N_V8,
-'N_Value':N_Value,
-'S':S,
-'Value':Value,
-'Net_Value':Net_Value
-},
-context_instance=RequestContext(request))
-	else:
-  		form = soil_ohsrForm()
-	return render_to_response('report/report.html', {"form": form}, context_instance=RequestContext(request))
+    # This class is used to make empty formset forms required
+    class RequiredFormSet(BaseFormSet):
+        def __init__(self, *args, **kwargs):
+            super(RequiredFormSet, self).__init__(*args, **kwargs)
+            for form in self.forms:
+                form.empty_permitted = False
+
+    Soil_OhsrFormSet = formset_factory(Soil_OhsrForm, max_num=30, formset=RequiredFormSet)
+    zee = head.objects.aggregate(Max('id'))
+    mee = zee['id__max']
+    Head = head.objects.get(id = mee)
+
+    if request.method == 'POST': # If the form has been submitted...
+        form1 = ReportForm(request.POST) # A form bound to the POST data
+        # Create a formset from the submitted data
+        Soil_ohsr_formset = Soil_OhsrFormSet(request.POST, request.FILES)
+        
+        if form1.is_valid() and Soil_ohsr_formset.is_valid():
+	   report = form1.save(commit=False)
+	   report.Head_id = Head
+	   report.save()
+           for form in Soil_ohsr_formset.forms:
+                Soil_ohsr = form.save(commit=False)
+                Soil_ohsr.Report_id = report
+                Soil_ohsr.save()
+	
+            #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
+	return HttpResponseRedirect(reverse('Automation.report.views.result_Soil_ohsr'))
+    else:
+        report_form = ReportForm()
+        Soil_ohsr_formset = Soil_OhsrFormSet()
+    
+    # For CSRF protection
+    c = {'report_form': report_form,
+         'Soil_ohsr_formset': Soil_ohsr_formset,
+        }
+    c.update(csrf(request))
+    
+    return render_to_response('report/index.html', c)
+
+def result_Soil_ohsr(request):
+	Id = Soil_Ohsr.objects.aggregate(Max('Report_id'))
+	ID = Id['Report_id__max']
+	ohsr = Soil_Ohsr.objects.filter(Report_id = ID)
+	zee = head.objects.aggregate(Max('id'))
+	mee = zee['id__max']
+	Head = head.objects.all().filter(id = mee)
+	organisation = Organisation.objects.all().filter(id = 1)
+	return render_to_response('report/soil_ohsr.html', {'ohsr':ohsr, 'Head':Head, 'organisation':organisation,},context_instance=RequestContext(request))
 
 ###########################################################################
 #to make html file "report_base.html" for a platforms to different reports# 
@@ -298,40 +193,65 @@ def result(request):
 	zee = head.objects.aggregate(Max('id'))
 	mee = zee['id__max']
 	Head = head.objects.filter(id = mee)
-	return render_to_response('report/header.html', {'Head':Head,},context_instance=RequestContext(request))
+	organisation = Organisation.objects.all().filter(id = 1)
+	return render_to_response('report/report_base.html', {'Head':Head, 'organisation':organisation,},context_instance=RequestContext(request))
 
 ###################################	
 #views for the model chem_analysis#
 ###################################
 def chemical_analysis(request):
-		ChemicalFormSet = modelformset_factory(chem_analysis)
-		job = ClientJob.objects.get(id=request.GET['id'])
-		if request.method=='POST':
-                	formset = ChemicalFormSet(request.POST)
-                	if formset.is_valid():
-				cd = formset.cleaned_data  
-				profile = formset.save(commit=False)
-				profile.job_no=job
-				profile.save()
-				return HttpResponseRedirect(reverse('Automation.report.views.result_chem'))
-				#return render_to_response('report/chemical_analysis.html', {'chem': chem,},context_instance=RequestContext(request))
-			else:
-		        	return HttpResponse("There was an error with your submission. Please try again.")
-						
-		else:
-			formset = ChemicalFormSet()
-			#Id = chem_analysis.objects.aggregate(Max('id'))
-			#ID = Id['id__max']
-			#formset = chem_analysis.objects.filter(id = ID)
-		return render_to_response('report/report3.html', {'formset': formset}, context_instance=RequestContext(request))
-			
-def result_chem(request):
-	Id = chem_analysis.objects.aggregate(Max('id'))
-	ID = Id['id__max']
-	chem = chem_analysis.objects.filter(id = ID)
-	return render_to_response('report/chemical_analysis.html', {'chem': chem,},context_instance=RequestContext(request))
-'''
+    # This class is used to make empty formset forms required
+    class RequiredFormSet(BaseFormSet):
+        def __init__(self, *args, **kwargs):
+            super(RequiredFormSet, self).__init__(*args, **kwargs)
+            for form in self.forms:
+                form.empty_permitted = False
 
+    Chem_analysisFormSet = formset_factory(Chem_analysisForm, max_num=30, formset=RequiredFormSet)
+    zee = head.objects.aggregate(Max('id'))
+    mee = zee['id__max']
+    Head = head.objects.get(id = mee)
+
+    if request.method == 'POST': # If the form has been submitted...
+        form1 = ReportForm(request.POST) # A form bound to the POST data
+        # Create a formset from the submitted data
+        chem_analysis_formset = Chem_analysisFormSet(request.POST, request.FILES)
+        
+        if form1.is_valid() and chem_analysis_formset.is_valid():
+	   report = form1.save(commit=False)
+	   report.Head_id = Head
+	   report.save()
+           for form in chem_analysis_formset.forms:
+                chem_analysis = form.save(commit=False)
+                chem_analysis.Report_id = report
+                chem_analysis.save()
+	
+            #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
+	return HttpResponseRedirect(reverse('Automation.report.views.result_chem'))
+    else:
+        report_form = ReportForm()
+        chem_analysis_formset = Chem_analysisFormSet()
+    
+    # For CSRF protection
+    c = {'report_form': report_form,
+         'chem_analysis_formset': chem_analysis_formset,
+        }
+    c.update(csrf(request))
+    
+    return render_to_response('report/index.html', c)
+
+def result_chem(request):
+	Id = Chem_analysis.objects.aggregate(Max('Report_id'))
+	ID = Id['Report_id__max']
+	chem = Chem_analysis.objects.filter(Report_id = ID)
+	zee = head.objects.aggregate(Max('id'))
+	mee = zee['id__max']
+	Head = head.objects.all().filter(id = mee)
+	organisation = Organisation.objects.all().filter(id = 1)
+	return render_to_response('report/chemical_analysis.html', {'chem': chem, 'Head':Head, 'organisation':organisation,},context_instance=RequestContext(request))
+
+
+'''
 def chemical_analysis(request):
 	if request.method=='POST':
                 	form = chem_analysisForm(request.POST)
@@ -383,32 +303,480 @@ def index(request):
             for form in self.forms:
                 form.empty_permitted = False
 
-    TodoItemFormSet = formset_factory(TodoItemForm, max_num=10, formset=RequiredFormSet)
+    CubeFormSet = formset_factory(CubeForm, max_num=30, formset=RequiredFormSet)
+    zee = head.objects.aggregate(Max('id'))
+    mee = zee['id__max']
+    Head = head.objects.get(id = mee)
 
     if request.method == 'POST': # If the form has been submitted...
-        todo_list_form = TodoListForm(request.POST) # A form bound to the POST data
+        form1 = ReportForm(request.POST) # A form bound to the POST data
         # Create a formset from the submitted data
-        todo_item_formset = TodoItemFormSet(request.POST, request.FILES)
+        todo_item_formset = CubeFormSet(request.POST, request.FILES)
         
-        if todo_list_form.is_valid() and todo_item_formset.is_valid():
-            todo_list = todo_list_form.save()
-            for form in todo_item_formset.forms:
+        if form1.is_valid() and todo_item_formset.is_valid():
+	   report = form1.save(commit=False)
+	   report.Head_id = Head
+	   report.save()
+           for form in todo_item_formset.forms:
                 todo_item = form.save(commit=False)
-                todo_item.list = todo_list
+                todo_item.Report_id = report
                 todo_item.save()
-
-            return HttpResponseRedirect('thanks') # Redirect to a 'success' page
+	
+            #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
+	return HttpResponseRedirect(reverse('Automation.report.views.result_cube'))
     else:
-        todo_list_form = TodoListForm()
-        todo_item_formset = TodoItemFormSet()
+        report_form = ReportForm()
+        todo_item_formset = CubeFormSet()
     
     # For CSRF protection
     # See http://docs.djangoproject.com/en/dev/ref/contrib/csrf/ 
-    c = {'todo_list_form': todo_list_form,
+    c = {'report_form': report_form,
          'todo_item_formset': todo_item_formset,
         }
     c.update(csrf(request))
     
     return render_to_response('report/index.html', c)
 
+def result_cube(request):
+	Id = Cube.objects.aggregate(Max('Report_id'))
+	ID = Id['Report_id__max']
+	cubee = Cube.objects.filter(Report_id = ID)
+#	return result(request)
+	zee = head.objects.aggregate(Max('id'))
+	mee = zee['id__max']
+	Head = head.objects.all().filter(id = mee)
+	organisation = Organisation.objects.all().filter(id = 1)
+	return render_to_response('report/cube.html', {'cubee':cubee, 'Head':Head, 'organisation':organisation},context_instance=RequestContext(request))
+
+################
+#view for water#
+################
+def water_test(request):
+    # This class is used to make empty formset forms required
+    class RequiredFormSet(BaseFormSet):
+        def __init__(self, *args, **kwargs):
+            super(RequiredFormSet, self).__init__(*args, **kwargs)
+            for form in self.forms:
+                form.empty_permitted = False
+
+    WaterFormSet = formset_factory(WaterForm, max_num=30, formset=RequiredFormSet)
+    zee = head.objects.aggregate(Max('id'))
+    mee = zee['id__max']
+    Head = head.objects.get(id = mee)
+
+    if request.method == 'POST': # If the form has been submitted...
+        form1 = ReportForm(request.POST) # A form bound to the POST data
+        # Create a formset from the submitted data
+        water_formset = WaterFormSet(request.POST, request.FILES)
+        
+        if form1.is_valid() and water_formset.is_valid():
+	   report = form1.save(commit=False)
+	   report.Head_id = Head
+	   report.save()
+           for form in water_formset.forms:
+                water = form.save(commit=False)
+                water.Report_id = report
+                water.save()
+	
+           #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
+	   return HttpResponseRedirect(reverse('Automation.report.views.result_water'))
+    else:
+        report_form = ReportForm()
+        water_formset = WaterFormSet()
+    
+    # For CSRF protection
+    c = {'report_form': report_form,
+         'water_formset': water_formset,
+        }
+    c.update(csrf(request))
+    
+    return render_to_response('report/index.html', c)
+
+def result_water(request):
+	Id = Water.objects.aggregate(Max('Report_id'))
+	ID = Id['Report_id__max']
+	water = Water.objects.filter(Report_id = ID)
+	zee = head.objects.aggregate(Max('id'))
+	mee = zee['id__max']
+	Head = head.objects.all().filter(id = mee)
+	organisation = Organisation.objects.all().filter(id = 1)
+	return render_to_response('report/water.html', {'water':water, 'Head':Head, 'organisation':organisation,},context_instance=RequestContext(request))
+
+##################
+# View for Brick #
+##################
+def brick_test(request):
+    # This class is used to make empty formset forms required
+    class RequiredFormSet(BaseFormSet):
+        def __init__(self, *args, **kwargs):
+            super(RequiredFormSet, self).__init__(*args, **kwargs)
+            for form in self.forms:
+                form.empty_permitted = False
+
+    BrickFormSet = formset_factory(BrickForm, max_num=30, formset=RequiredFormSet)
+    zee = head.objects.aggregate(Max('id'))
+    mee = zee['id__max']
+    Head = head.objects.get(id = mee)
+
+    if request.method == 'POST': # If the form has been submitted...
+        form1 = ReportForm(request.POST) # A form bound to the POST data
+        # Create a formset from the submitted data
+        brick_formset = BrickFormSet(request.POST, request.FILES)
+        
+        if form1.is_valid() and brick_formset.is_valid():
+	   report = form1.save(commit=False)
+	   report.Head_id = Head
+	   report.save()
+           for form in brick_formset.forms:
+                brick = form.save(commit=False)
+                brick.Report_id = report
+                brick.save()
+	
+           #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
+	   return HttpResponseRedirect(reverse('Automation.report.views.result_brick'))
+    else:
+        report_form = ReportForm()
+        brick_formset = BrickFormSet()
+    
+    # For CSRF protection
+    c = {'report_form': report_form,
+         'brick_formset': brick_formset,
+        }
+    c.update(csrf(request))
+    
+    return render_to_response('report/index.html', c)
+
+def result_brick(request):
+	Id = Brick.objects.aggregate(Max('Report_id'))
+	ID = Id['Report_id__max']
+	brick = Brick.objects.filter(Report_id = ID)
+	zee = head.objects.aggregate(Max('id'))
+	mee = zee['id__max']
+	Head = head.objects.all().filter(id = mee)
+	organisation = Organisation.objects.all().filter(id = 1)
+	return render_to_response('report/brick.html', {'brick':brick, 'Head':Head, 'organisation':organisation,},context_instance=RequestContext(request))
+
+##########################
+# view for Soil_Building #
+##########################
+def soil_building(request):
+    # This class is used to make empty formset forms required
+    class RequiredFormSet(BaseFormSet):
+        def __init__(self, *args, **kwargs):
+            super(RequiredFormSet, self).__init__(*args, **kwargs)
+            for form in self.forms:
+                form.empty_permitted = False
+
+    Soil_BuildingFormSet = formset_factory(Soil_BuildingForm, max_num=30, formset=RequiredFormSet)
+    zee = head.objects.aggregate(Max('id'))
+    mee = zee['id__max']
+    Head = head.objects.get(id = mee)
+
+    if request.method == 'POST': # If the form has been submitted...
+        form1 = ReportForm(request.POST) # A form bound to the POST data
+        # Create a formset from the submitted data
+        soil_building_formset = Soil_BuildingFormSet(request.POST, request.FILES)
+        
+        if form1.is_valid() and soil_building_formset.is_valid():
+	   report = form1.save(commit=False)
+	   report.Head_id = Head
+	   report.save()
+           for form in soil_building_formset.forms:
+                soil_building = form.save(commit=False)
+                soil_building.Report_id = report
+                soil_building.save()
+	
+           #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
+	   return HttpResponseRedirect(reverse('Automation.report.views.result_soil_building'))
+    else:
+        report_form = ReportForm()
+        soil_building_formset = Soil_BuildingFormSet()
+    
+    # For CSRF protection
+    c = {'report_form': report_form,
+         'soil_building_formset': soil_building_formset,
+        }
+    c.update(csrf(request))
+    
+    return render_to_response('report/index.html', c)
+
+def result_soil_building(request):
+	Id = Soil_Building.objects.aggregate(Max('Report_id'))
+	ID = Id['Report_id__max']
+	Soil_building = Soil_Building.objects.filter(Report_id = ID)
+	zee = head.objects.aggregate(Max('id'))
+	mee = zee['id__max']
+	Head = head.objects.all().filter(id = mee)
+	organisation = Organisation.objects.all().filter(id = 1)
+	return render_to_response('report/soil_building.html', {'Soil_building':Soil_building, 'Head':Head, 'organisation':organisation,},context_instance=RequestContext(request))
+
+######################
+# View for ADMIXTURE #
+######################
+def admixture(request):
+    # This class is used to make empty formset forms required
+    class RequiredFormSet(BaseFormSet):
+        def __init__(self, *args, **kwargs):
+            super(RequiredFormSet, self).__init__(*args, **kwargs)
+            for form in self.forms:
+                form.empty_permitted = False
+
+    AdmixtureFormSet = formset_factory(AdmixtureForm, max_num=30, formset=RequiredFormSet)
+    zee = head.objects.aggregate(Max('id'))
+    mee = zee['id__max']
+    Head = head.objects.get(id = mee)
+
+    if request.method == 'POST': # If the form has been submitted...
+        form1 = ReportForm(request.POST) # A form bound to the POST data
+        # Create a formset from the submitted data
+        Mixture_formset = AdmixtureFormSet(request.POST, request.FILES)
+        
+        if form1.is_valid() and Mixture_formset.is_valid():
+	   report = form1.save(commit=False)
+	   report.Head_id = Head
+	   report.save()
+           for form in Mixture_formset.forms:
+                Mixture = form.save(commit=False)
+                Mixture.Report_id = report
+                Mixture.save()
+	
+           #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
+	   return HttpResponseRedirect(reverse('Automation.report.views.result_Admixture'))
+    else:
+        report_form = ReportForm()
+        Mixture_formset = AdmixtureFormSet()
+    
+    # For CSRF protection
+    c = {'report_form': report_form,
+         'Mixture_formset': Mixture_formset,
+        }
+    c.update(csrf(request))
+    
+    return render_to_response('report/index.html', c)
+
+def result_Admixture(request):
+	Id = Admixture.objects.aggregate(Max('Report_id'))
+	ID = Id['Report_id__max']
+	mixture = Admixture.objects.filter(Report_id = ID)
+	zee = head.objects.aggregate(Max('id'))
+	mee = zee['id__max']
+	Head = head.objects.all().filter(id = mee)
+	organisation = Organisation.objects.all().filter(id = 1)
+	return render_to_response('report/admixture.html', {'mixture': mixture, 'Head':Head, 'organisation':organisation,},context_instance=RequestContext(request))
+
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#
+# (PPC) IS 1489-1 & 2 Fly Ash Or Clay #
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#
+def cement_ppc(request):
+    # This class is used to make empty formset forms required
+    class RequiredFormSet(BaseFormSet):
+        def __init__(self, *args, **kwargs):
+            super(RequiredFormSet, self).__init__(*args, **kwargs)
+            for form in self.forms:
+                form.empty_permitted = False
+
+    Cement_PPCFormSet = formset_factory(Cement_PPCForm, max_num=30, formset=RequiredFormSet)
+    zee = head.objects.aggregate(Max('id'))
+    mee = zee['id__max']
+    Head = head.objects.get(id = mee)
+
+    if request.method == 'POST': # If the form has been submitted...
+        form1 = ReportForm(request.POST) # A form bound to the POST data
+        # Create a formset from the submitted data
+        Cement_ppc_formset = Cement_PPCFormSet(request.POST, request.FILES)
+        
+        if form1.is_valid() and Cement_ppc_formset.is_valid():
+	   report = form1.save(commit=False)
+	   report.Head_id = Head
+	   report.save()
+           for form in Cement_ppc_formset.forms:
+                Cement_ppc = form.save(commit=False)
+                Cement_ppc.Report_id = report
+                Cement_ppc.save()
+	
+           #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
+	   return HttpResponseRedirect(reverse('Automation.report.views.result_Cement_PPC'))
+    else:
+        report_form = ReportForm()
+        Cement_ppc_formset = Cement_PPCFormSet()
+    
+    # For CSRF protection
+    c = {'report_form': report_form,
+         'Cement_ppc_formset': Cement_ppc_formset,
+        }
+    c.update(csrf(request))
+    
+    return render_to_response('report/index.html', c)
+
+def result_Cement_PPC(request):
+	Id = Cement_PPC.objects.aggregate(Max('Report_id'))
+	ID = Id['Report_id__max']
+	ppc = Cement_PPC.objects.filter(Report_id = ID)
+	zee = head.objects.aggregate(Max('id'))
+	mee = zee['id__max']
+	Head = head.objects.all().filter(id = mee)
+	organisation = Organisation.objects.all().filter(id = 1)
+	return render_to_response('report/cement_ppc.html', {'ppc': ppc, 'Head':Head, 'organisation':organisation,},context_instance=RequestContext(request))
+
+#***********************#
+# (OPC) IS 269 33 GRADE #
+#***********************#
+def cement_opc_33(request):
+    # This class is used to make empty formset forms required
+    class RequiredFormSet(BaseFormSet):
+        def __init__(self, *args, **kwargs):
+            super(RequiredFormSet, self).__init__(*args, **kwargs)
+            for form in self.forms:
+                form.empty_permitted = False
+
+    Cement_OPC_33FormSet = formset_factory(Cement_OPC_33Form, max_num=30, formset=RequiredFormSet)
+    zee = head.objects.aggregate(Max('id'))
+    mee = zee['id__max']
+    Head = head.objects.get(id = mee)
+
+    if request.method == 'POST': # If the form has been submitted...
+        form1 = ReportForm(request.POST) # A form bound to the POST data
+        # Create a formset from the submitted data
+        Cement_opc_33_formset = Cement_OPC_33FormSet(request.POST, request.FILES)
+        
+        if form1.is_valid() and Cement_opc_33_formset.is_valid():
+	   report = form1.save(commit=False)
+	   report.Head_id = Head
+	   report.save()
+           for form in Cement_opc_33_formset.forms:
+                Cement_opc_33 = form.save(commit=False)
+                Cement_opc_33.Report_id = report
+                Cement_opc_33.save()
+	
+           #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
+	   return HttpResponseRedirect(reverse('Automation.report.views.result_Cement_OPC_33'))
+    else:
+        report_form = ReportForm()
+        Cement_opc_33_formset = Cement_OPC_33FormSet()
+    
+    # For CSRF protection
+    c = {'report_form': report_form,
+         'Cement_opc_33_formset': Cement_opc_33_formset,
+        }
+    c.update(csrf(request))
+    
+    return render_to_response('report/index.html', c)
+
+def result_Cement_OPC_33(request):
+	Id = Cement_OPC_33.objects.aggregate(Max('Report_id'))
+	ID = Id['Report_id__max']
+	opc33 = Cement_OPC_33.objects.filter(Report_id = ID)
+	zee = head.objects.aggregate(Max('id'))
+	mee = zee['id__max']
+	Head = head.objects.all().filter(id = mee)
+	organisation = Organisation.objects.all().filter(id = 1)
+	return render_to_response('report/cement_opc.html', {'opc33': opc33, 'Head':Head, 'organisation':organisation,},context_instance=RequestContext(request))
+
+#************************#
+# (OPC) IS 8812 43 GRADE # 
+#************************#
+def cement_opc_43(request):
+    # This class is used to make empty formset forms required
+    class RequiredFormSet(BaseFormSet):
+        def __init__(self, *args, **kwargs):
+            super(RequiredFormSet, self).__init__(*args, **kwargs)
+            for form in self.forms:
+                form.empty_permitted = False
+
+    Cement_OPC_43FormSet = formset_factory(Cement_OPC_43Form, max_num=30, formset=RequiredFormSet)
+    zee = head.objects.aggregate(Max('id'))
+    mee = zee['id__max']
+    Head = head.objects.get(id = mee)
+
+    if request.method == 'POST': # If the form has been submitted...
+        form1 = ReportForm(request.POST) # A form bound to the POST data
+        # Create a formset from the submitted data
+        Cement_opc_43_formset = Cement_OPC_43FormSet(request.POST, request.FILES)
+        
+        if form1.is_valid() and Cement_opc_43_formset.is_valid():
+	   report = form1.save(commit=False)
+	   report.Head_id = Head
+	   report.save()
+           for form in Cement_opc_43_formset.forms:
+                Cement_opc_43 = form.save(commit=False)
+                Cement_opc_43.Report_id = report
+                Cement_opc_43.save()
+	
+           #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
+	   return HttpResponseRedirect(reverse('Automation.report.views.result_Cement_OPC_43'))
+    else:
+        report_form = ReportForm()
+        Cement_opc_43_formset = Cement_OPC_43FormSet()
+    
+    # For CSRF protection
+    c = {'report_form': report_form,
+         'Cement_opc_43_formset': Cement_opc_43_formset,
+        }
+    c.update(csrf(request))
+    
+    return render_to_response('report/index.html', c)
+
+def result_Cement_OPC_43(request):
+	Id = Cement_OPC_43.objects.aggregate(Max('Report_id'))
+	ID = Id['Report_id__max']
+	opc43 = Cement_OPC_43.objects.filter(Report_id = ID)
+	zee = head.objects.aggregate(Max('id'))
+	mee = zee['id__max']
+	Head = head.objects.all().filter(id = mee)
+	organisation = Organisation.objects.all().filter(id = 1)
+	return render_to_response('report/cement_opc.html', {'opc43': opc43, 'Head':Head, 'organisation':organisation,},context_instance=RequestContext(request))
+
+#*************************#
+# (OPC) IS 12269 53 GRADE #
+#*************************#
+def cement_opc_53(request):
+    # This class is used to make empty formset forms required
+    class RequiredFormSet(BaseFormSet):
+        def __init__(self, *args, **kwargs):
+            super(RequiredFormSet, self).__init__(*args, **kwargs)
+            for form in self.forms:
+                form.empty_permitted = False
+
+    Cement_OPC_53FormSet = formset_factory(Cement_OPC_53Form, max_num=30, formset=RequiredFormSet)
+    zee = head.objects.aggregate(Max('id'))
+    mee = zee['id__max']
+    Head = head.objects.get(id = mee)
+
+    if request.method == 'POST': # If the form has been submitted...
+        form1 = ReportForm(request.POST) # A form bound to the POST data
+        # Create a formset from the submitted data
+        Cement_opc_53_formset = Cement_OPC_53FormSet(request.POST, request.FILES)
+        
+        if form1.is_valid() and Cement_opc_53_formset.is_valid():
+	   report = form1.save(commit=False)
+	   report.Head_id = Head
+	   report.save()
+           for form in Cement_opc_53_formset.forms:
+                Cement_opc_53 = form.save(commit=False)
+                Cement_opc_53.Report_id = report
+                Cement_opc_53.save()
+	
+           #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
+	   return HttpResponseRedirect(reverse('Automation.report.views.result_Cement_OPC_53'))
+    else:
+        report_form = ReportForm()
+        Cement_opc_53_formset = Cement_OPC_53FormSet()
+    
+    # For CSRF protection
+    c = {'report_form': report_form,
+         'Cement_opc_53_formset': Cement_opc_53_formset,
+        }
+    c.update(csrf(request))
+    
+    return render_to_response('report/index.html', c)
+
+def result_Cement_OPC_53(request):
+	Id = Cement_OPC_53.objects.aggregate(Max('Report_id'))
+	ID = Id['Report_id__max']
+	opc53 = Cement_OPC_53.objects.filter(Report_id = ID)
+	zee = head.objects.aggregate(Max('id'))
+	mee = zee['id__max']
+	Head = head.objects.all().filter(id = mee)
+	organisation = Organisation.objects.all().filter(id = 1)
+	return render_to_response('report/cement_opc.html', {'opc53': opc53, 'Head':Head, 'organisation':organisation,},context_instance=RequestContext(request))
 

@@ -1,3 +1,5 @@
+{% extends "base.html" %}
+{% load i18n %}
 <html>
 <head>
     <title>gne</title>
@@ -23,7 +25,7 @@
 </tr>
 	{% endfor %}
 {% endif %}
-        
+    
 </table> </div>
 
 </html>
