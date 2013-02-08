@@ -5,12 +5,11 @@ from django.views.generic.simple import direct_to_template
 
 urlpatterns = patterns('Automation.report.views',
 	#(r'^$', 'report_app'),
-	(r'^report_pdf/$', 'report_pdf'),
-	#(r'^get_report/$', 'report_show'),
+	#(r'^report_pdf/$', 'report_pdf'),
 	(r'^report/$', 'report'),
 	(r'^chemical_analysis/$', 'chemical_analysis'),
-	(r'^header/$', 'header'),
-	(r'^result/$', 'result'),
+	#(r'^material_type/$', 'material_type'),
+	#(r'^result/$', 'result'),
 	(r'^result_chem/$', 'result_chem'),
 	#(r'^cube_test/$', 'cube_test'),
 	(r'^result_cube/$', 'result_cube'),
@@ -36,5 +35,15 @@ urlpatterns = patterns('Automation.report.views',
 	(r'thanks$',  direct_to_template, {'template': 'report/thanks.html'}),
 )
 
+urlpatterns += patterns('Automation.report.search',
+	(r'^search_report/$', 'search_report'),
+	(r'^search/$', 'search'),
+	(r'^report_gen/$', 'report_gen'),
+)	
+
+urlpatterns += patterns('Automation.report.pdf',
+	(r'^myview/$', 'myview'),
+	(r'^graph/$', 'graph'),
+)
 
 

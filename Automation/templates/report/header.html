@@ -11,12 +11,17 @@
 -->	<p>To,</p>
 	<p><b>Subject:</b><a style="padding-left:30px; position:absolute">{{Heads.subject}}</a></p>
 	<p><b>Refrence:</b><a style="padding-left:17px; margin-bottom:0;">Your letter No. {{Heads.reference}} dated    {{Heads.dated}}</a></p>
+	<p>{{Heads.Header_column_1}}</p>	
+	<p>{{Heads.Header_column_2}}</p>	
 	<p>Sir,</p>
 	<p style="padding-left:85px; margin-top:0; margin-bottom:0;">The result of  sent by you on {{Heads.date_of_testing}} are as under:</p>	
 {% endfor  %}
 <div id="report">
 	{% block report %}{% endblock %}
 </div>
+{% for Heads in Head %}
+	<p>{{Heads.Footer_column_3}}</p>
+{% endfor  %}
 {% block footer %}
 	<h3>Conditions:</h3>
 	<p>1. This test report refers only to the samples submitted for the test.</p>
@@ -31,6 +36,9 @@
 	</table>
 {% endblock %}
 <hr/>
+	<table align="center">
+		<td><a href="{{ LOCAL_URL }}/automation/report/myview"><input type="submit" value="PDF" /></a></td>
+	</table>
 </body>	
 </html>
 {% endblock %}

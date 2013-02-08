@@ -5,6 +5,12 @@
 <head>
     <link rel="stylesheet" href="http://localhost/style1.css" />
     <title>{% block title %}GNDEC{% endblock %}</title>
+	<link href='style.css' rel='stylesheet' type='text/css'><link href='http://localhost/calendar/datepick/redmond.datepick.css' rel='stylesheet' type='text/css'><script type='text/javascript' src='{http://localhost/calendar/datepick/jquery.datepick.js'></script><script>
+ $(document).ready(function(){
+   $('#id_Date_of_testing').datepick({dateFormat:'yyyy-mm-dd'});
+     
+ });
+ </script>
 </head>
 <body>
 <div id="sidebar">
@@ -22,8 +28,8 @@
                     </table>
 <hr/>
 <!--                        <div>{{organisations.director}}</div>
--->			<div>{{organisations.logo_upload}}</div>
-			
+			<div>{{organisations.logo_upload}}</div>
+-->			
        		   {% endfor %}
 </div>	
 {% endblock %}

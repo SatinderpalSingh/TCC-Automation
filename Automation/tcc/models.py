@@ -155,6 +155,9 @@ class Job(models.Model):
 	report_type = models.ForeignKey(Report)
 	pay = models.CharField(max_length=600, blank=True )
 	date = models.DateField(auto_now_add=True)
+	Reference_Letter_no = models.CharField(max_length=60, blank=True )		#required for final report
+	Letter_date = models.DateField(auto_now_add=True)				#required for final report
+
 
 	def __unicode__(self):
           return self.id()

@@ -35,7 +35,7 @@ this.options[this.selectedIndex].value;">
   <option value="/automation/tcc11_12/save/?q={{field.id}}">{{field.name}}</option>
 	{% endfor %}
 </select></td></tr>
-<tr><td><b><center><a href="http://localhost/automation/tcc11_12/map" >Mark site on map</a> </td></tr>
+<tr><td><b><center><a href="/automation/tcc11_12/map" >Mark site on map</a> </td></tr>
  
 <br>
     {% if form.errors %}

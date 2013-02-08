@@ -3,6 +3,7 @@ from django.views.generic.simple import direct_to_template
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = patterns('',
     # Example:
@@ -19,3 +20,4 @@ urlpatterns = patterns('',
    
 )
 
+urlpatterns += staticfiles_urlpatterns()

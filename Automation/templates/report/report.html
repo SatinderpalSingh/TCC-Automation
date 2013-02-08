@@ -5,7 +5,7 @@
     <title>Gndec Ludhiana</title>
 </head>
 {% block content %}
-
+<body>
 <br>
     {% if form.errors %}
         <p style="color: red;">
@@ -15,12 +15,22 @@
 
     <form action="" method="post">
 	{% csrf_token %}
-        <table>
+        <table><label for="id_search">
             {{ form.as_table }}
         </table>
         <input type="submit" value="Submit">
 	
     </form>
+<!--
+<p>Enter your name:</p>  
+<form action="" method="get">  
+    <input type="text" Header_column_1="q">  
+    <br>  
+    <input type="submit" value="Make a PDF">  
+</form> 
 
+<b><center><b><center><a href="{{ LOCAL_URL }}/automation/report/report">Search</a>-->
+
+</body>
 </html>
 {% endblock %}

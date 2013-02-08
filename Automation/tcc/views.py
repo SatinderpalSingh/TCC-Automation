@@ -257,7 +257,7 @@ def add_suspence(request):
 	client = SuspenceJob.objects.get(id=minid)
 	value = SuspenceJob.objects.values_list('test').filter(id=minid)
 	values = Test.objects.get(id = value)
-	if client.field_id == 5:
+	if client.field_id == 2:
 		a = int(client.other) - 10
 		b = int(client.other) - 20
 		c = int(client.other) - 30

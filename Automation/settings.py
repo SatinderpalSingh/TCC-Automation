@@ -74,6 +74,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    "/home/goraya/Automation/static",
 )
 
 # List of finder classes that know how to find static files in
@@ -123,10 +124,12 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
+    'django.contrib.staticfiles',
     'registration',
     'Automation.tcc',
     'Automation.report',
     'tagging',
+    'django_extensions',
 )
 
 
@@ -134,3 +137,16 @@ ACCOUNT_ACTIVATION_DAYS = 2
 
 
 LOGIN_REDIRECT_URL = '/automation/tcc11_12/index'
+
+STATIC_URL = '/static/'
+
+STATIC_ROOT = '/home/goraya/Automation/static/'
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.contrib.auth.context_processors.auth',
+    'django.contrib.messages.context_processors.messages',
+)

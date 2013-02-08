@@ -2,11 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<title>Dynamic Forms in Django Example</title>
+<title>GNDEC</title>
 
 <style type="text/css">
 html {
-  background-color: #ededed;
+  background-color: #282828;
+/*  background-image:url('../build.jpg');
+*/
 }
 
 body {
@@ -16,15 +18,16 @@ body {
   margin: 0 auto;
   margin-top: 15px;
   border: 1px solid #ccc;
-  background-color: #fff;
+  background-color:#585858;
 }
 
 h1 {
-  color: #000;
+  color: #fff000;
 }
 
 h2 {
-  color: #333;
+  color: #33FF00;
+  
 }
 
 .section, .item {
@@ -32,7 +35,7 @@ h2 {
 }
 
 .item {
-  background-color: #dcf0f7;
+  background-color: #282828;
   border: 1px solid #ddd;
   margin-bottom: 4px;
   padding: 5px 15px;
@@ -52,6 +55,10 @@ h2 {
 
 a.delete:hover {
   color: red;
+}
+p
+{
+color:#FFF000; 
 }
 </style>
 
@@ -147,6 +154,12 @@ $(document).ready(function() {
 
 });
 </script>
+
+<link href='style.css' rel='stylesheet' type='text/css'><link href='{{ MEDIA_URL }}calendar/datepick/redmond.datepick.css' rel='stylesheet' type='text/css'><script type='text/javascript' src='{{ MEDIA_URL }}calendar/datepick/jquery.datepick.js'></script><script>
+ $(document).ready(function(){
+   $('#id_Date_of_testing').datepick({dateFormat:'yyyy-mm-dd'});
+ });
+ </script>
 
 </head>
 <body>

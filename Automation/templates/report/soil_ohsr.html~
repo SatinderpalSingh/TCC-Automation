@@ -59,7 +59,7 @@
 <p>(ii)	The safe net allowable bearing pressure that can be imposed on the base of the foundation without the settlement exceeding a permissible value is calculated either from settlement 	analysis or from the Standard Penetration Test Values (N) whichever is applicable depending upon the nature of sub soil strata.</p>
 
 <h3>Underground Water Table</h3>
-<p>The underground (i.e. sub-soil) water was {{soil.Water_table}} at  the time of  field soil investigation.</p>
+<p>The underground (i.e. sub-soil) water was {{soil.Water_table}} m at  the time of  field soil investigation.</p>
 
 <h3>Proposed Structure/substructure</h3>
 <p>The  substructure i.e. foundation of the proposed {{soil.Type_of_str}} is taken in the form of circular raft of diameter {{soil.Diameter_B}} to be laid at a depth of {{soil.Depth_D}} m.  Thus for calculations of raft foundation following data is considered.</p>
@@ -77,7 +77,7 @@
 <p span style="padding-left:100px">Diameter of circular raft foundation  =  B  = {{soil.Diameter_B}} m</p>
 
 <p span style="padding-left:100px"><b>The soil properties at the foundation level i.e. at {{soil.Depth_D}} m depth are:</b></p>
-<p span style="padding-left:100px">γ = {{soil.Gama_G}} kN/m3,             c = {{soil.C}} kN/m2</p>
+<p span style="padding-left:100px">γ = {{soil.Gama_G}} kN/m&sup2;,             c = {{soil.C}} kN/m&sup2;</p>
 <p span style="padding-left:100px">ф = {{soil.Phay}}&deg;, 		     ф' =  {{soil.Phay_fe}}&deg;</p>
 
 <p span style="padding-left:100px"><b>Bearing Capacity factors are:</b></p>
