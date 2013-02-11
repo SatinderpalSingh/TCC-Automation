@@ -1,5 +1,5 @@
 # Django settings for TCC11_12 project.
-
+import os
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -67,14 +67,15 @@ MEDIA_URL = 'http://localhost/media/'
 # Examples: "http://foo.com/media/", "/media/".
 ADMIN_MEDIA_PREFIX = '/media/'
 
-AUTH_PROFILE_MODULE = 'tcc.UserProfile'
+
+#AUTH_PROFILE_MODULE = 'tcc.UserProfile'os.path.join(PROJECT_PATH, 'assets'),
+
 
 # Additional locations of static files
-STATICFILES_DIRS = (
+STATICFILES_DIRS = ( #'/home/goraya/Automation/static/',
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    "/home/goraya/Automation/static",
 )
 
 # List of finder classes that know how to find static files in
@@ -138,9 +139,9 @@ ACCOUNT_ACTIVATION_DAYS = 2
 
 LOGIN_REDIRECT_URL = '/automation/tcc11_12/index'
 
-STATIC_URL = '/static/'
+STATIC_URL = '/admin/'
 
-STATIC_ROOT = '/home/goraya/Automation/static/'
+STATIC_ROOT = '/home/goraya/Automation/admin/'
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.debug',

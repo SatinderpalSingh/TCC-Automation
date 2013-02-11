@@ -1,6 +1,6 @@
 from django.utils.translation import ugettext as _
 
-TEST_CHOICE = ( 
+TEST_CHOICES = ( 
 	('SOIL OHSR', _('SOIL OHSR')),
 	('SOIL BUILDING', _('SOIL BUILDING')),
 	('ADMIXTURE', _('ADMIXTURE')),

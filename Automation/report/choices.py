@@ -1,3 +1,6 @@
+"""
+File contains different type of choices
+"""
 from django.utils.translation import ugettext as _
 
 TEST_CHOICES = ( 

@@ -42,8 +42,8 @@ urlpatterns += patterns('Automation.report.search',
 )	
 
 urlpatterns += patterns('Automation.report.pdf',
-	(r'^myview/$', 'myview'),
-#	(r'^pdf_view/$', 'pdf_view'),
+	(r'^report_pdf/$', 'report_pdf'),
+#	(r'^render_to_pdf/$', 'render_to_pdf'),
 )
 
 

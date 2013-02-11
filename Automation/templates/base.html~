@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load staticfiles %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -36,6 +37,8 @@ swfobject.embedSWF("http://www.youtube.com/v/JVuUwvUUPro&amp;ap=%2526fmt%3D22", 
 
 
 <body class="nvidia-com" link="#C0C0C0" vlink="#808080" alink="#76B900" text="white">
+<img src="{% static 'img/1.jpg' %}" alt="Hi!"/>
+
 <div>
         {% block header %}
 	<a href="http://localhost/automation/tcc11_12/index/">{% trans "Home" %}</a> | 
@@ -50,6 +53,10 @@ swfobject.embedSWF("http://www.youtube.com/v/JVuUwvUUPro&amp;ap=%2526fmt%3D22", 
 	<hr />
         {% endblock %}
     </div>
+<div class="wrapper">
+
+	<div class="container">
+
    {% block nav-main %}{% endblock %}
 		<!-- END navigation -->
 
@@ -63,7 +70,8 @@ swfobject.embedSWF("http://www.youtube.com/v/JVuUwvUUPro&amp;ap=%2526fmt%3D22", 
 		<!-- END content -->
 
   <br/><br/><br/><br/><br/><br />
-  
+  </div>
+</div>
         {% block footer %}
 
        <a href="http://gndec.ac.in/"><img src="http://localhost/media/css/css/greengne.png" align="right" height="90" width="90"></a>

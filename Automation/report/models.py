@@ -1,3 +1,6 @@
+"""
+Models for the TCC-Automation is described in this file
+"""
 from django.db import models
 from django.forms import ModelForm, TextInput, ModelChoiceField
 import datetime
@@ -12,10 +15,9 @@ from django.forms.models import BaseModelFormSet  #for defining formset in model
 from Automation.report.choices import *
 import ast
 
-
-#################
-# Search Report #
-#################
+"""
+Search Report 
+"""
 class Search(models.Model):
 	job = models.CharField(max_length=10)
 	report = models.CharField(max_length=10)
@@ -23,26 +25,9 @@ class Search(models.Model):
 
 	def __str__(self):
 		return self.report
-'''
-#####################################
-# Header File For Different Reports #
-#####################################
-class head(models.Model):
-	material = models.CharField(max_length=100)
-#	job = models.ForeignKey(Job, null=True)
-#	refrence_no = models.CharField(max_length=255)    		#college reference letter no. 
-#	dispatch_report_date = models.CharField(max_length=255)		#report dispatch date, to the client
-#	date_of_testing = models.CharField(max_length=255)		#date on which test is performed	
-#	subject = models.CharField(max_length=255)	
-#	dated = models.CharField(max_length=255, blank=True)				
-#	reference = models.CharField(max_length=255)			#client reference letter no.
-#	Header_column_1 = models.CharField(max_length=255,blank=True)
-#	Header_column_2 = models.CharField(max_length=255,blank=True)
-#	Footer_column_3 = models.CharField(max_length=255,blank=True)
-	    
-	def __str__(self):
-		return self.material
-'''        
+"""
+Main reort table
+"""
 class Report(models.Model):
     #Head_id = models.ForeignKey(head)
 	job = models.ForeignKey(Job, null=True)
@@ -54,9 +39,9 @@ class Report(models.Model):
 	def __unicode__(self):
 		return self.Sample_no #+ "(" + str(self.Head_id) + ")"
 
-#########################
-# Report Type Cube_Test #
-#########################
+"""
+Report Type Cube_Test
+"""
 class Cube(models.Model):
 	ip_address = models.IPAddressField() 
 	Report_id = models.ForeignKey(Report)
@@ -69,11 +54,10 @@ class Cube(models.Model):
     	def __unicode__(self):
         	return self.S_No + " (" + str(self.Report_id) + ")"
 
-################################
-# Report Type Cheical_Analysis #        
-################################        
+"""
+Report Type Cheical_Analysis
+"""       
 class Chem_analysis(models.Model):
-#    job_no = models.ForeignKey(ClientJob)
 	ip_address = models.IPAddressField()
 	Report_id = models.ForeignKey(Report)
     	s_no = models.CharField(max_length=255,blank=True, default=1)
@@ -83,9 +67,9 @@ class Chem_analysis(models.Model):
     	def __unicode__(self):
         	return self.s_no + "(" + str(self.Report_id) + ")"
 
-###########################
-# Report Of Steel Samples #
-###########################
+"""
+Report Of Steel Samples
+"""
 class Steel(models.Model):
 	ip_address = models.IPAddressField()		
 	Report_id = models.ForeignKey(Report)
@@ -99,9 +83,9 @@ class Steel(models.Model):
 	def __unicode__(self):
 		return self.S_No + "(" + str(self.Report_id) + ")"
 
-########################
-#Report of Ground Water#
-########################
+"""
+Report of Ground Water
+"""
 class Ground_Water(models.Model):
 	ip_address = models.IPAddressField()
 	Report_id = models.ForeignKey(Report)
@@ -113,9 +97,9 @@ class Ground_Water(models.Model):
 	def __unicode__(self):
 		return self.S_No + "(" + str(self.Report_id) + ")"
 
-##########################
-#Report of Concrete Paver#
-##########################
+"""
+Report of Concrete Paver
+"""
 class Concrete_Paver(models.Model):
 	ip_address = models.IPAddressField()
 	Report_id = models.ForeignKey(Report)
@@ -127,9 +111,9 @@ class Concrete_Paver(models.Model):
 	def __unicode__(self):
 		return self.S_No + "(" + str(self.Report_id) + ")"
 
-###########################
-#Report of Interlock_Tiles#
-###########################
+"""
+Report of Interlock_Tiles
+"""
 class Interlock_Tiles(models.Model):
 	ip_address = models.IPAddressField()
 	Report_id = models.ForeignKey(Report)
@@ -141,9 +125,9 @@ class Interlock_Tiles(models.Model):
 	def __unicode__(self):
 		return self.S_No + "(" + str(self.Report_id) + ")"
 
-######################
-#Report of PC Samples#
-######################
+"""
+Report of PC Samples
+"""
 class PC(models.Model):
 	ip_address = models.IPAddressField()
 	Report_id = models.ForeignKey(Report)
@@ -154,9 +138,9 @@ class PC(models.Model):
 	def __unicode__(self):
 		return self.S_No + "(" + str(self.Report_id) + ")"
   
-##################################
-#Report of Rebound Hammer Testing# 
-##################################
+"""
+Report of Rebound Hammer Testing
+"""
 class Rebound_Hammer_Testing(models.Model):
 	ip_address = models.IPAddressField()
 	Report_id = models.ForeignKey(Report)
@@ -169,9 +153,9 @@ class Rebound_Hammer_Testing(models.Model):
 	def __unicode__(self):
 		return self.S_No + "(" + str(self.Report_id) + ")"
 
-########################
-#Report of Brick Sample#
-########################
+"""
+Report of Brick Sample
+"""
 class Brick(models.Model):
 	ip_address = models.IPAddressField()
 	Report_id = models.ForeignKey(Report)
@@ -184,9 +168,9 @@ class Brick(models.Model):
 	def __unicode__(self):
 		return self.S_No + "(" + str(self.Report_id) + ")"
 
-###############################
-# Report of WATER/WASTE WATER #
-###############################
+"""
+Report of WATER/WASTE WATER
+"""
 class Water(models.Model):
 	ip_address = models.IPAddressField()
 	Report_id = models.ForeignKey(Report)
@@ -223,13 +207,9 @@ class Water(models.Model):
 	def __unicode__(self):
 		return self.PH_Value + "(" + str(self.Report_id) + ")"
 
-#####################	
-# Report of BITUMEN #	
-#####################
-
-############################
-# data model for SOIL OSHR #
-############################
+"""
+ Model for SOIL OSHR
+"""
 class Soil_Ohsr(models.Model):
 	ip_address = models.IPAddressField()
 	Report_id = models.ForeignKey(Report)
@@ -307,9 +287,9 @@ class Soil_Ohsr(models.Model):
 	def __unicode__(self):
 	        return self.Date_of_testing + "(" + str(self.Report_id) + ")"
 
-###########################
-# Model for Soil_Building #
-###########################
+"""
+Model for Soil_Building
+"""
 class Soil_Building(models.Model):
 	ip_address = models.IPAddressField()
 	Report_id = models.ForeignKey(Report)
@@ -417,9 +397,9 @@ class Soil_Building(models.Model):
 	def __unicode__(self):
 	        return self.Date_of_testing + "(" + str(self.Report_id) + ")"
 
-#######################
-# Model for ADMIXTURE #
-#######################
+"""
+Model for ADMIXTURE 
+"""
 class Admixture(models.Model):
 	ip_address = models.IPAddressField()
 	Report_id = models.ForeignKey(Report)
@@ -434,14 +414,14 @@ class Admixture(models.Model):
 
 	def __unicode__(self):
 	        return self.S_No + "(" + str(self.Report_id) + ")"
-
+"""
 ###########################
 # Model for Cement Report #
 ########################### 
-
-#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#
-# (PPC) IS 1489-1 & 2 Fly Ash Or Clay #
-#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#
+"""
+"""
+(PPC) IS 1489-1 & 2 Fly Ash Or Clay
+"""
 class Cement_PPC(models.Model):
 	ip_address = models.IPAddressField()
 	Report_id = models.ForeignKey(Report)
@@ -460,9 +440,9 @@ class Cement_PPC(models.Model):
 	def __unicode__(self):
 	        return self.Initial_Time + "(" + str(self.Report_id) + ")"
 
-#***********************#
-# (OPC) IS 269 33 GRADE #
-#***********************#
+"""
+(OPC) IS 269 33 GRADE 
+"""
 class Cement_OPC_33(models.Model):
 	ip_address = models.IPAddressField()
 	Report_id = models.ForeignKey(Report)
@@ -482,9 +462,9 @@ class Cement_OPC_33(models.Model):
 	        return self.Initial_Time + "(" + str(self.Report_id) + ")"
 
 
-#************************#
-# (OPC) IS 8812 43 GRADE # 
-#************************#
+"""
+(OPC) IS 8812 43 GRADE 
+"""
 class Cement_OPC_43(models.Model):
 	ip_address = models.IPAddressField()
 	Report_id = models.ForeignKey(Report)
@@ -504,9 +484,9 @@ class Cement_OPC_43(models.Model):
 	        return self.Initial_Time + "(" + str(self.Report_id) + ")"
 
 
-#*************************#
-# (OPC) IS 12269 53 GRADE #
-#*************************#
+"""
+(OPC) IS 12269 53 GRADE
+"""
 class Cement_OPC_53(models.Model):
 	ip_address = models.IPAddressField()
 	Report_id = models.ForeignKey(Report)
@@ -524,7 +504,9 @@ class Cement_OPC_53(models.Model):
 
 	def __unicode__(self):
 	        return self.Initial_Time + "(" + str(self.Report_id) + ")"
-
+"""
+Model to store pdf/image
+"""
 class Report(models.Model): 
 	file = models.FileField(upload_to='uploads/documents') 
 

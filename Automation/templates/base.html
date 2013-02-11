@@ -36,6 +36,9 @@ swfobject.embedSWF("http://www.youtube.com/v/JVuUwvUUPro&amp;ap=%2526fmt%3D22", 
 
 
 <body class="nvidia-com" link="#C0C0C0" vlink="#808080" alink="#76B900" text="white">
+{% load staticfiles %}
+<img src="{% static 'img/1.jpg' %}" alt="Hi!"/>
+
 <div>
         {% block header %}
 	<a href="http://localhost/automation/tcc11_12/index/">{% trans "Home" %}</a> | 

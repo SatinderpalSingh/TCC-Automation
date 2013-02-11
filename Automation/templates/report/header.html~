@@ -3,7 +3,7 @@
 <html>
 {% block content %}
 <body>
-{% for Heads in report_form1 %}
+{% for Heads in Head %}
 	<table   width="100%"><tr>
 	<td align="left"><a>No.GNDEC/TCC/R/{{Heads.refrence_no}}</td><td align="right"><a>Dated{{Heads.dispatch_report_date}}</a></td>
 	</tr></table>

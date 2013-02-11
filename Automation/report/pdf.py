@@ -1,3 +1,10 @@
+"""
+This view is defined to produce pdf output 
+"""
+
+"""
+For Pisa library
+"""
 import cStringIO as StringIO
 import ho.pisa as pisa
 from django.template.loader import get_template, render_to_string
@@ -5,15 +12,39 @@ from django.template import Context
 from django.http import HttpResponseRedirect
 from cgi import escape
 from Automation.report.views import *
-#*******************************************#
-#For reportlab
-#*******************************************#
+"""
+For Reportlab
+"""
 from reportlab.graphics.shapes import Drawing,colors
 from reportlab.graphics.widgets.markers import makeMarker
 from reportlab.graphics.charts.barcharts import VerticalBarChart
 from reportlab.graphics.charts.lineplots import LinePlot
 
+"""
+Reportlab view
+"""
+def report_pdf(request):
+	#Create the HttpResponse object with the appropriate PDF headers.
+	response = HttpResponse(mimetype='application/pdf')
+	response['Content-Disposition'] = 'attachment; filename=report.pdf'
 
+	#Create a PDF object, using the response object as its "file."
+	p = canvas.Canvas(response)
+
+	# Draw things on the PDF. Here's where the PDF generation happens.
+	# See the ReportLab documentation for the full list of functionality.
+	p.drawString(100, 100, "Guru Nanak Dev Engg College, Ludhiana")
+
+	# Close the PDF object cleanly, and we're done.
+	p.showPage()
+    	p.save()
+  	return response
+
+
+"""
+Pisa view
+"""
+'''
 def render_to_pdf(template_src, context_dict):
 	template = get_template(template_src)
 	context = Context(context_dict)
@@ -26,68 +57,14 @@ def render_to_pdf(template_src, context_dict):
 	return HttpResponse('We had some errors<pre>%s</pre>' % escape(html))
 
 def myview(request):
-	#Retrieve data or whatever you need	
-	#result = Organisation.objects.all().filter(id = 1)
-	organisation = Organisation.objects.all().filter(id = 1)
-	return render_to_pdf(
-	        'report/pdf.html',
-	        {
-	        	'pagesize':'A4',
-#	        	'mylist': result,
-			'organisation': organisation,
-	        }
-	    )
-'''
-def html_view(request, as_pdf = False):
-    #Get varaibles to populate the template
-    data = HttpResponseRedirect(reverse('Automation.report.views.result_chem'))
-    payload = {'data':data,}
-    if as_pdf:
-        return payload
-    return render_to_response('report/pdf.html', payload, RequestContext(request))
+    #Retrieve data or whatever you need
+    results = "hello"
+    return render_to_pdf(
+            'report/pdf.html',
+            {
+                'pagesize':'A4',
+                'mylist': results,
+            }
+        )'''
 
-def pdf_view(request):
-    payload = html_view(request, as_pdf = True)
-    file_data = render_to_string('report/pdf.html', payload, RequestContext(request))
-    myfile = StringIO.StringIO()
-    pisa.CreatePDF(file_data, myfile)
-    myfile.seek(0)
-    response =  HttpResponse(myfile, mimetype='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename=coupon.pdf'
-    return response
-'''
-
-def graph(request):
-	buffer = StringIO()
-	p = canvas.Canvas(buffer, pagesize = letter)
-	
-	##### Beginning of code in question
-	
-	d = Drawing(200, 100)
-	pc = Pie()
-	pc.x = 65
-	pc.y = 15
-	pc.width = 70
-	pc.height = 70
-	pc.data = [10,20,30,40,50,60]
-	pc.labels = ['a','b','c','d','e','f']
-	pc.slices.strokeWidth=0.5
-	pc.slices[3].popout = 10
-	pc.slices[3].strokeWidth = 2
-	pc.slices[3].strokeDashArray = [2,2]
-	pc.slices[3].labelRadius = 1.75
-	pc.slices[3].fontColor = colors.red
-	d.add(pc)
-	
-	p.drawPath(d) ### THIS DOES NOT WORK, but need something similar
-	
-	#####End of Code in Question
-	
-	p.showPage() #Page Two
-	
-	p.save() # Saves the PDF and Returns with Response\
-	
-	pdf = buffer.getvalue()
-	buffer.close()
-	response.write(pdf)
-	return response			
+			

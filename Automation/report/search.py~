@@ -103,11 +103,11 @@ def report_gen(request):
 	job = request.GET.get('id', '')
 	p = Search(job = job)
 	p.save()	
-	material = Job.objects.all().values('clientjob__material__name',)
+	material = Job.objects.filter(id = job).values('clientjob__material__name',)
 	report = Report.objects.filter(id = job).values('id')
 	
 	if material == "Cube":
-		Report_id = Cube.objects.get(report = Repost_id)
+		Report_id = Cube.objects.get(report = Report_id)
 		return HttpResponseRedirect(reverse('Automation.report.views.result_cube'))
 	else:
 			
