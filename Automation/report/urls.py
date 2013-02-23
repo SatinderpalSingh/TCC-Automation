@@ -49,6 +49,7 @@ Urls of pdf.py
 """
 urlpatterns += patterns('Automation.report.pdf',
 	(r'^report_pdf/$', 'report_pdf'),
+	(r'^myview/$', 'myview'),
 )
 
 

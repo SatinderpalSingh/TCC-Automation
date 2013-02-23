@@ -54,6 +54,7 @@ USE_L10N = True
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
 MEDIA_ROOT = '/usr/local/lib/python2.7/dist-packages/django/contrib/admin/media/'
+STATIC_ROOT = '/home/goraya/Automation/static/'
 
 LOCAL_URL = 'http://localhost/'
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
@@ -61,7 +62,7 @@ LOCAL_URL = 'http://localhost/'
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
 MEDIA_URL = 'http://localhost/media/'
 #MEDIA_URL = 'http://localhost/media/'
-
+STATIC_URL = 'http://localhost/static/'
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".

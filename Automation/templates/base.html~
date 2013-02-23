@@ -1,5 +1,4 @@
 {% load i18n %}
-{% load staticfiles %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -37,6 +36,7 @@ swfobject.embedSWF("http://www.youtube.com/v/JVuUwvUUPro&amp;ap=%2526fmt%3D22", 
 
 
 <body class="nvidia-com" link="#C0C0C0" vlink="#808080" alink="#76B900" text="white">
+{% load staticfiles %}
 <img src="{% static 'img/1.jpg' %}" alt="Hi!"/>
 
 <div>

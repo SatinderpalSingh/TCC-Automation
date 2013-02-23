@@ -1,3 +1,6 @@
+"""
+Views for different search functions
+"""
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
@@ -7,6 +10,9 @@ from Automation.report.forms import *
 from Automation.report.views import *
 from django.core.context_processors import csrf
 
+"""
+For search by report_id
+"""
 '''
 def search_report(request):
 	if request.method == 'POST':
@@ -66,9 +72,10 @@ def search_report(request):
 		form = SearchForm()
 	return render_to_response('report/report.html', {'form': form}, context_instance=RequestContext(request))
 '''
-#************
-# Search Box 
-#************
+
+"""
+Search Box of searching Job_id to generate report
+"""
 def search(request):
 	query = request.GET.get('q', '')
     	if query:
@@ -77,20 +84,9 @@ def search(request):
         	results = []
     	return render_to_response("report/search.html", {"results": results,"query": query})
 
-'''
-###############
-# Job Details #
-###############
-def job_detail(request):
-	job = Job.objects.get(id=request.GET['id'])	
-	job_add = Job.objects.filter(id = job).values
-('client__client__name','client__client__address_1','clientjob__material__name','suspencejob__field__name','id','job_no','date','site','amount__report_type','report_type','amount__college_income')
-	return render_to_response("report/search.html", {
-        "results": results,
-        "query": query
-    })
-'''
-
+"""
+For searching the report by Job_id
+"""
 def search_report(request):
 	query = request.GET.get('q', '')
     	if query:
@@ -99,6 +95,9 @@ def search_report(request):
         	results = []
     	return render_to_response("report/search_report.html", {"results": results,"query": query})
 
+"""
+For re-generating the report
+"""
 def report_gen(request):
 	job = request.GET.get('id', '')
 	p = Search(job = job)
@@ -112,26 +111,6 @@ def report_gen(request):
 	else:
 			
 		return HttpResponse("gal halle bani ni")
-'''
-def report_gen(request, offset):
-    if request.method == 'POST':
-        form = SearchForm(request.POST)
-        if form.is_valid():
-            instance = form.save(commit=False)
-            instance.search = Search.objects.get(title=offset)
-            instance.job = request.job
-            instance.report = request.report
-	    instance.material = request.material
-            instance.save()
-        return HttpResponseRedirect('/')
-    else:
-        form = SearchForm()
-
-    c = {'searchform': form,
-        }
-    c.update(csrf(request))
-    render_to_response('report/search_report.html', c)
-'''
 
 
 

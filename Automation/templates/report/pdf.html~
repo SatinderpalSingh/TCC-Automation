@@ -18,7 +18,7 @@
             }
         </style>
     </head>
-{% block content %}
+{% block report %}
     <body>
         <div>
             {% for item in mylist %}

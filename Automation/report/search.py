@@ -97,7 +97,7 @@ def search_report(request):
 
 """
 For re-generating the report
-"""
+"""'''
 def report_gen(request):
 	job = request.GET.get('id', '')
 	p = Search(job = job)
@@ -110,6 +110,22 @@ def report_gen(request):
 		return HttpResponseRedirect(reverse('Automation.report.views.result_cube'))
 	else:
 			
+		return HttpResponse("gal halle bani ni")
+'''
+def report_gen(request):
+	job = request.GET.get('id', '')
+	p = Search(job = job)
+	p.save()	
+	material = Job.objects.get(id = job)
+	mat = ClientJob.objects.get(job = material.id)
+	report = Report.objects.filter(job = job).values('id')
+	mate = mat.material_id
+
+	if mate == 1:
+		Report_id = Brick.objects.get(Report_id = report)	
+		return HttpResponseRedirect(reverse('Automation.report.views.result_cube'))
+	else:
+	
 		return HttpResponse("gal halle bani ni")
 
 
