@@ -1,0 +1,20 @@
+As soon as you complete the installation of the Software, you will then be able to access it by going to link : http://domain/automation.
+Here domain is the place where you installed the software, that may be localhost or any other server of your choice.
+After this you need to customize the software according to your need. For this go to the admin panel :http://domain/automation/admin.
+Here you need to add your organisation, department, satff, labs, materials and tests, which are necessary for the further execution of the software.
+After adding the required data you can use the software from different interfaces.
+
+Now when you have completely installed the software, you need to use the functionality of software. The softwarehas the following features :
+
+> Registration of clients.
+> Catalog
+> Search the previously added clients.
+> View the previous works of the clients.
+> Add the Job for the desired clients.
+> Get the bill, receipt and voucher of the client whose work has been added.
+> Generate the registers(monthly, daily, main register, tax register, suspence registers, lab report etc )
+> Generate the report for the different materials tested.
+
+Now as soon as you login into the software, the software checks whether you are employee, client or admin. Based on the authorisation you have, you are able to accesss various features of the software. Then after login(as employee), you need to register the client This can be done by going to Client > Register Client.
+After registering a client, you can add the jobs for the client added. Or you can add the job for any client after searching th client.
+Client > Search Client. The search results will give the clients details. You will then be provided the option for adding the job for the client, or view previous works of the client.
