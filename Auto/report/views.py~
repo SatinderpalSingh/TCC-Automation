@@ -48,7 +48,7 @@ def soil_ohsr(request):
                 Soil_ohsr.save()
 	
             #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
-	return HttpResponseRedirect(reverse('Automation.report.views.result_Soil_ohsr'))
+	return HttpResponseRedirect(reverse('Auto.report.views.result_Soil_ohsr'))
     else:
         report_form = ReportForm()
         Soil_ohsr_formset = Soil_OhsrFormSet()
@@ -111,7 +111,7 @@ def chemical_analysis(request):
 		chem_analysis.save()
 	
             #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
-	return HttpResponseRedirect(reverse('Automation.report.views.result_chem'))
+	return HttpResponseRedirect(reverse('Auto.report.views.result_chem'))
     else:
         report_form = ReportForm()
         chem_analysis_formset = Chem_analysisFormSet()
@@ -169,8 +169,8 @@ def index(request):
 		todo_item.ip_address = request.META['REMOTE_ADDR']
                 todo_item.save()
 	
-            #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
-	return HttpResponseRedirect(reverse('Automation.report.views.result_cube'))
+            #return HttpResponseRedirect('tanks') # Redirect to a 'success' page
+	return HttpResponseRedirect(reverse('Auto.report.views.result_cube'))
     else:
         report_form = ReportForm()
         todo_item_formset = CubeFormSet()
@@ -183,7 +183,7 @@ def index(request):
     c.update(csrf(request))
     
     return render_to_response('report/index.html', c)
-'''
+
 def result_cube(request):
 	Id = Cube.objects.aggregate(Max('Report_id'))
 	ID = Id['Report_id__max']
@@ -204,8 +204,8 @@ def result_cube(request):
 	Id = Cube.objects.aggregate(Max('Report_id'))
 	ID = Id['Report_id__max']
 	cubee = Cube.objects.filter(Report_id = ID)
-	return render_to_response('report/cube.html', {'cubee':cubee, 'Head':Head, 		'organisation':organisation,},context_instance=RequestContext(request))
-
+	return render_to_response('report/cube.html', {'cubee':cubee, 'Head':Head,'organisation':organisation,},context_instance=RequestContext(request))
+'''
 
 
 """
@@ -243,7 +243,7 @@ def water_test(request):
                 water.save()
 	
            #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
-	   return HttpResponseRedirect(reverse('Automation.report.views.result_water'))
+	   return HttpResponseRedirect(reverse('Auto.report.views.result_water'))
     else:
         report_form = ReportForm()
         water_formset = WaterFormSet()
@@ -301,7 +301,7 @@ def brick_test(request):
                 brick.save()
 	
            #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
-	   return HttpResponseRedirect(reverse('Automation.report.views.result_brick'))
+	   return HttpResponseRedirect(reverse('Auto.report.views.result_brick'))
     else:
         report_form = ReportForm()
         brick_formset = BrickFormSet()
@@ -359,7 +359,7 @@ def soil_building(request):
 		soil_building.save()
 	
            #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
-	   return HttpResponseRedirect(reverse('Automation.report.views.result_soil_building'))
+	   return HttpResponseRedirect(reverse('Auto.report.views.result_soil_building'))
     else:
         report_form = ReportForm()
         soil_building_formset = Soil_BuildingFormSet()
@@ -417,7 +417,7 @@ def admixture(request):
                 Mixture.save()
 	
            #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
-	   return HttpResponseRedirect(reverse('Automation.report.views.result_Admixture'))
+	   return HttpResponseRedirect(reverse('Auto.report.views.result_Admixture'))
     else:
         report_form = ReportForm()
         Mixture_formset = AdmixtureFormSet()
@@ -475,7 +475,7 @@ def cement_ppc(request):
                 Cement_ppc.save()
 	
            #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
-	   return HttpResponseRedirect(reverse('Automation.report.views.result_Cement_PPC'))
+	   return HttpResponseRedirect(reverse('Auto.report.views.result_Cement_PPC'))
     else:
         report_form = ReportForm()
         Cement_ppc_formset = Cement_PPCFormSet()
@@ -533,7 +533,7 @@ def cement_opc_33(request):
 		Cement_opc_33.save()
 	
            #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
-	   return HttpResponseRedirect(reverse('Automation.report.views.result_Cement_OPC_33'))
+	   return HttpResponseRedirect(reverse('Auto.report.views.result_Cement_OPC_33'))
     else:
         report_form = ReportForm()
         Cement_opc_33_formset = Cement_OPC_33FormSet()
@@ -591,7 +591,7 @@ def cement_opc_43(request):
                 Cement_opc_43.save()
 	
            #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
-	   return HttpResponseRedirect(reverse('Automation.report.views.result_Cement_OPC_43F'))
+	   return HttpResponseRedirect(reverse('Auto.report.views.result_Cement_OPC_43F'))
     else:
         report_form = ReportForm()
         Cement_opc_43_formset = Cement_OPC_43FormSet()
@@ -649,7 +649,7 @@ def cement_opc_53(request):
                 Cement_opc_53.save()
 	
            #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
-	   return HttpResponseRedirect(reverse('Automation.report.views.result_Cement_OPC_53'))
+	   return HttpResponseRedirect(reverse('Auto.report.views.result_Cement_OPC_53'))
     else:
         report_form = ReportForm()
         Cement_opc_53_formset = Cement_OPC_53FormSet()
@@ -672,3 +672,60 @@ def result_Cement_OPC_53(request):
 	organisation = Organisation.objects.all().filter(id = 1)
 	return render_to_response('report/cement_opc.html', {'opc53': opc53, 'Head':Head, 'organisation':organisation,},context_instance=RequestContext(request))
 
+"""
+Steel Sample
+"""
+def steel(request):
+    # This class is used to make empty formset forms required
+    class RequiredFormSet(BaseFormSet):
+        def __init__(self, *args, **kwargs):
+            super(RequiredFormSet, self).__init__(*args, **kwargs)
+            for form in self.forms:
+                form.empty_permitted = False
+
+    job =Job.objects.get(id=request.GET['id'])
+    steel_FormSet = formset_factory(SteelForm, max_num=30, formset=RequiredFormSet)
+
+    if request.method == 'POST': # If the form has been submitted...
+        form1 = ReportForm(request.POST) # A form bound to the POST data
+        if form1.is_valid():
+                cd = form1.cleaned_data
+                profile = form1.save(commit=False)
+                profile.job =job
+                profile.save()
+
+        # Create a formset from the submitted data
+        steel_formset = steel_FormSet(request.POST, request.FILES)
+
+        if form1.is_valid() and steel_formset.is_valid():
+           report = form1.save(commit=False)
+           report.save()
+           for form in steel_formset.forms:
+                steel = form.save(commit=False)
+                steel.Report_id = report
+                steel.ip_address = request.META['REMOTE_ADDR']
+                steel.save()
+
+           #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
+           return HttpResponseRedirect(reverse('Auto.report.views.result_steel'))
+    else:
+        report_form = ReportForm()
+        steel_formset = steel_FormSet()
+
+    # For CSRF protection
+    c = {'report_form': report_form,
+         'steel_formset': steel_formset,
+        }
+    c.update(csrf(request))
+    return render_to_response('report/index.html', c)
+
+def result_steel(request):
+        Id = Steel.objects.aggregate(Max('Report_id'))
+        ID = Id['Report_id__max']
+        st  = Steel.objects.filter(Report_id = ID)
+        Id = Report.objects.aggregate(Max('id'))
+        ID = Id['id__max']
+        Head = Report.objects.filter(id = ID)
+        organisation = Organisation.objects.all().filter(id = 1)
+        return render_to_response('report/steel.html', {'st': st, 'Head':Head, 'organisation':organisation,},context_instance=RequestContext(request))
+ 

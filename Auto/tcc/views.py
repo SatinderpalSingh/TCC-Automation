@@ -706,23 +706,23 @@ def ta_da_bill(request):
 	c = job.id
 	client = Job.objects.filter(id=c).values('client__client__name')
 	lab_staff = tada.testing_staff_code
-        t1=0
-        temp = [0,0,0,0,0,0,0,0,0,0]
+	t1=0
+	temp = [0,0,0,0,0,0,0,0,0,0]
 	range = lab_staff.split(',')
 	i=0
 	while i < len(range):
 		temp[i] = range[i]
 		i+=1
-	amount1 = temp[0]
-	amount2 = temp[1]
-	amount3 = temp[2]
-	amount4 = temp[3]
-	amount5 = temp[4]
-	amount6 = temp[5]
-	amount7 = temp[6]
-	amount8 = temp[7]
-	amount9 = temp[8]
-	amount10 = temp[9]
+		amount1 = temp[0]
+		amount2 = temp[1]
+		amount3 = temp[2]
+		amount4 = temp[3]
+		amount5 = temp[4]
+		amount6 = temp[5]
+		amount7 = temp[6]
+		amount8 = temp[7]
+		amount9 = temp[8]
+		amount10 = temp[9]
 	
 	staff =Staff.objects.all().filter(Q(code=amount1)| Q(code=amount2) | Q(code=amount3) 
 	| Q(code=amount4) | Q(code=amount5) | Q(code=amount6) | Q(code=amount7)| Q(code=amount8)

@@ -262,6 +262,15 @@ $(document).ready(function() {
 	</div>
     {% endfor %}
 
+    {{ steel_formset.management_form }}
+    {% for form in steel_formset.forms %}
+    <div class="item">
+                {{ form.as_p }}
+                <p style=""><a class="delete" href="#">Delete</a></p>
+        </div>
+    {% endfor %}
+
+
     <p><a id="add" href="#">Add Row</a></p>
 
     <input type="submit" value=" Submit " />

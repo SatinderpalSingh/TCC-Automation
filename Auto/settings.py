@@ -3,6 +3,7 @@
 
 This file is like the configuration file for the Software. The connectivity of Database with Software is done here. 
 """
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -46,7 +47,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'tccludhiana@gmail.com'
 EMAIL_HOST_PASSWORD = 'tcc@gndec'
 EMAIL_USE_TLS = True 
-EMAIL_PORT = "587"
+EMAIL_PORT = 587
 
 SESSION_KEY = '_auth_user_id'
 BACKEND_SESSION_KEY = '_auth_user_backend'
@@ -61,6 +62,8 @@ USE_L10N = True
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
 MEDIA_ROOT = '/usr/local/lib/python2.7/dist-packages/django/contrib/admin/media/'
+#MEDIA_ROOT = '/home/sandy/public_html/media/'
+
 STATIC_ROOT = '/home/sandy/Auto/static/'
 
 LOCAL_URL = 'http://202.164.53.122/'

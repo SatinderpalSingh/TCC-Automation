@@ -169,7 +169,7 @@ def index(request):
 		todo_item.ip_address = request.META['REMOTE_ADDR']
                 todo_item.save()
 	
-            #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
+            #return HttpResponseRedirect('tanks') # Redirect to a 'success' page
 	return HttpResponseRedirect(reverse('Auto.report.views.result_cube'))
     else:
         report_form = ReportForm()
@@ -672,3 +672,348 @@ def result_Cement_OPC_53(request):
 	organisation = Organisation.objects.all().filter(id = 1)
 	return render_to_response('report/cement_opc.html', {'opc53': opc53, 'Head':Head, 'organisation':organisation,},context_instance=RequestContext(request))
 
+"""
+Steel Sample
+"""
+def steel(request):
+    # This class is used to make empty formset forms required
+    class RequiredFormSet(BaseFormSet):
+        def __init__(self, *args, **kwargs):
+            super(RequiredFormSet, self).__init__(*args, **kwargs)
+            for form in self.forms:
+                form.empty_permitted = False
+
+    job =Job.objects.get(id=request.GET['id'])
+    steel_FormSet = formset_factory(SteelForm, max_num=30, formset=RequiredFormSet)
+
+    if request.method == 'POST': # If the form has been submitted...
+        form1 = ReportForm(request.POST) # A form bound to the POST data
+        if form1.is_valid():
+                cd = form1.cleaned_data
+                profile = form1.save(commit=False)
+                profile.job =job
+                profile.save()
+
+        # Create a formset from the submitted data
+        steel_formset = steel_FormSet(request.POST, request.FILES)
+
+        if form1.is_valid() and steel_formset.is_valid():
+           report = form1.save(commit=False)
+           report.save()
+           for form in steel_formset.forms:
+                steel = form.save(commit=False)
+                steel.Report_id = report
+                steel.ip_address = request.META['REMOTE_ADDR']
+                steel.save()
+
+           #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
+           return HttpResponseRedirect(reverse('Auto.report.views.result_steel'))
+    else:
+        report_form = ReportForm()
+        steel_formset = steel_FormSet()
+
+    # For CSRF protection
+    c = {'report_form': report_form,
+         'steel_formset': steel_formset,
+        }
+    c.update(csrf(request))
+    return render_to_response('report/index.html', c)
+
+def result_steel(request):
+        Id = Steel.objects.aggregate(Max('Report_id'))
+        ID = Id['Report_id__max']
+        st  = Steel.objects.filter(Report_id = ID)
+        Id = Report.objects.aggregate(Max('id'))
+        ID = Id['id__max']
+        Head = Report.objects.filter(id = ID)
+        organisation = Organisation.objects.all().filter(id = 1)
+        return render_to_response('report/steel.html', {'st': st, 'Head':Head, 'organisation':organisation,},context_instance=RequestContext(request))
+ 
+"""
+Concrete Paver
+"""
+
+def steel(request):
+    # This class is used to make empty formset forms required
+    class RequiredFormSet(BaseFormSet):
+        def __init__(self, *args, **kwargs):
+            super(RequiredFormSet, self).__init__(*args, **kwargs)
+            for form in self.forms:
+                form.empty_permitted = False
+
+    job =Job.objects.get(id=request.GET['id'])
+    steel_FormSet = formset_factory(SteelForm, max_num=30, formset=RequiredFormSet)
+
+    if request.method == 'POST': # If the form has been submitted...
+        form1 = ReportForm(request.POST) # A form bound to the POST data
+        if form1.is_valid():
+                cd = form1.cleaned_data
+                profile = form1.save(commit=False)
+                profile.job =job
+                profile.save()
+
+        # Create a formset from the submitted data
+        steel_formset = steel_FormSet(request.POST, request.FILES)
+
+        if form1.is_valid() and steel_formset.is_valid():
+           report = form1.save(commit=False)
+           report.save()
+           for form in steel_formset.forms:
+                steel = form.save(commit=False)
+                steel.Report_id = report
+                steel.ip_address = request.META['REMOTE_ADDR']
+                steel.save()
+
+           #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
+           return HttpResponseRedirect(reverse('Auto.report.views.result_steel'))
+    else:
+        report_form = ReportForm()
+        steel_formset = steel_FormSet()
+
+    # For CSRF protection
+    c = {'report_form': report_form,
+         'steel_formset': steel_formset,
+        }
+    c.update(csrf(request))
+    return render_to_response('report/index.html', c)
+
+def result_steel(request):
+        Id = Steel.objects.aggregate(Max('Report_id'))
+        ID = Id['Report_id__max']
+        st  = Steel.objects.filter(Report_id = ID)
+        Id = Report.objects.aggregate(Max('id'))
+        ID = Id['id__max']
+        Head = Report.objects.filter(id = ID)
+        organisation = Organisation.objects.all().filter(id = 1)
+        return render_to_response('report/steel.html', {'st': st, 'Head':Head, 'organisation':organisation,},context_instance=RequestContext(request))
+
+"""
+Interlock Tiles
+"""
+def steel(request):
+    # This class is used to make empty formset forms required
+    class RequiredFormSet(BaseFormSet):
+        def __init__(self, *args, **kwargs):
+            super(RequiredFormSet, self).__init__(*args, **kwargs)
+            for form in self.forms:
+                form.empty_permitted = False
+
+    job =Job.objects.get(id=request.GET['id'])
+    steel_FormSet = formset_factory(SteelForm, max_num=30, formset=RequiredFormSet)
+
+    if request.method == 'POST': # If the form has been submitted...
+        form1 = ReportForm(request.POST) # A form bound to the POST data
+        if form1.is_valid():
+                cd = form1.cleaned_data
+                profile = form1.save(commit=False)
+                profile.job =job
+                profile.save()
+
+        # Create a formset from the submitted data
+        steel_formset = steel_FormSet(request.POST, request.FILES)
+
+        if form1.is_valid() and steel_formset.is_valid():
+           report = form1.save(commit=False)
+           report.save()
+           for form in steel_formset.forms:
+                steel = form.save(commit=False)
+                steel.Report_id = report
+                steel.ip_address = request.META['REMOTE_ADDR']
+                steel.save()
+
+           #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
+           return HttpResponseRedirect(reverse('Auto.report.views.result_steel'))
+    else:
+        report_form = ReportForm()
+        steel_formset = steel_FormSet()
+
+    # For CSRF protection
+    c = {'report_form': report_form,
+         'steel_formset': steel_formset,
+        }
+    c.update(csrf(request))
+    return render_to_response('report/index.html', c)
+
+def result_steel(request):
+        Id = Steel.objects.aggregate(Max('Report_id'))
+        ID = Id['Report_id__max']
+        st  = Steel.objects.filter(Report_id = ID)
+        Id = Report.objects.aggregate(Max('id'))
+        ID = Id['id__max']
+        Head = Report.objects.filter(id = ID)
+        organisation = Organisation.objects.all().filter(id = 1)
+        return render_to_response('report/steel.html', {'st': st, 'Head':Head, 'organisation':organisation,},context_instance=RequestContext(request))
+"""
+PC
+""" 
+
+def steel(request):
+    # This class is used to make empty formset forms required
+    class RequiredFormSet(BaseFormSet):
+        def __init__(self, *args, **kwargs):
+            super(RequiredFormSet, self).__init__(*args, **kwargs)
+            for form in self.forms:
+                form.empty_permitted = False
+
+    job =Job.objects.get(id=request.GET['id'])
+    steel_FormSet = formset_factory(SteelForm, max_num=30, formset=RequiredFormSet)
+
+    if request.method == 'POST': # If the form has been submitted...
+        form1 = ReportForm(request.POST) # A form bound to the POST data
+        if form1.is_valid():
+                cd = form1.cleaned_data
+                profile = form1.save(commit=False)
+                profile.job =job
+                profile.save()
+
+        # Create a formset from the submitted data
+        steel_formset = steel_FormSet(request.POST, request.FILES)
+
+        if form1.is_valid() and steel_formset.is_valid():
+           report = form1.save(commit=False)
+           report.save()
+           for form in steel_formset.forms:
+                steel = form.save(commit=False)
+                steel.Report_id = report
+                steel.ip_address = request.META['REMOTE_ADDR']
+                steel.save()
+
+           #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
+           return HttpResponseRedirect(reverse('Auto.report.views.result_steel'))
+    else:
+        report_form = ReportForm()
+        steel_formset = steel_FormSet()
+
+    # For CSRF protection
+    c = {'report_form': report_form,
+         'steel_formset': steel_formset,
+        }
+    c.update(csrf(request))
+    return render_to_response('report/index.html', c)
+
+def result_steel(request):
+        Id = Steel.objects.aggregate(Max('Report_id'))
+        ID = Id['Report_id__max']
+        st  = Steel.objects.filter(Report_id = ID)
+        Id = Report.objects.aggregate(Max('id'))
+        ID = Id['id__max']
+        Head = Report.objects.filter(id = ID)
+        organisation = Organisation.objects.all().filter(id = 1)
+        return render_to_response('report/steel.html', {'st': st, 'Head':Head, 'organisation':organisation,},context_instance=RequestContext(request))
+
+"""
+Rebound Hammering
+""" 
+
+def steel(request):
+    # This class is used to make empty formset forms required
+    class RequiredFormSet(BaseFormSet):
+        def __init__(self, *args, **kwargs):
+            super(RequiredFormSet, self).__init__(*args, **kwargs)
+            for form in self.forms:
+                form.empty_permitted = False
+
+    job =Job.objects.get(id=request.GET['id'])
+    steel_FormSet = formset_factory(SteelForm, max_num=30, formset=RequiredFormSet)
+
+    if request.method == 'POST': # If the form has been submitted...
+        form1 = ReportForm(request.POST) # A form bound to the POST data
+        if form1.is_valid():
+                cd = form1.cleaned_data
+                profile = form1.save(commit=False)
+                profile.job =job
+                profile.save()
+
+        # Create a formset from the submitted data
+        steel_formset = steel_FormSet(request.POST, request.FILES)
+
+        if form1.is_valid() and steel_formset.is_valid():
+           report = form1.save(commit=False)
+           report.save()
+           for form in steel_formset.forms:
+                steel = form.save(commit=False)
+                steel.Report_id = report
+                steel.ip_address = request.META['REMOTE_ADDR']
+                steel.save()
+
+           #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
+           return HttpResponseRedirect(reverse('Auto.report.views.result_steel'))
+    else:
+        report_form = ReportForm()
+        steel_formset = steel_FormSet()
+
+    # For CSRF protection
+    c = {'report_form': report_form,
+         'steel_formset': steel_formset,
+        }
+    c.update(csrf(request))
+    return render_to_response('report/index.html', c)
+
+def result_steel(request):
+        Id = Steel.objects.aggregate(Max('Report_id'))
+        ID = Id['Report_id__max']
+        st  = Steel.objects.filter(Report_id = ID)
+        Id = Report.objects.aggregate(Max('id'))
+        ID = Id['id__max']
+        Head = Report.objects.filter(id = ID)
+        organisation = Organisation.objects.all().filter(id = 1)
+        return render_to_response('report/steel.html', {'st': st, 'Head':Head, 'organisation':organisation,},context_instance=RequestContext(request))
+
+"""
+Ground Water
+""" 
+
+def steel(request):
+    # This class is used to make empty formset forms required
+    class RequiredFormSet(BaseFormSet):
+        def __init__(self, *args, **kwargs):
+            super(RequiredFormSet, self).__init__(*args, **kwargs)
+            for form in self.forms:
+                form.empty_permitted = False
+
+    job =Job.objects.get(id=request.GET['id'])
+    steel_FormSet = formset_factory(SteelForm, max_num=30, formset=RequiredFormSet)
+
+    if request.method == 'POST': # If the form has been submitted...
+        form1 = ReportForm(request.POST) # A form bound to the POST data
+        if form1.is_valid():
+                cd = form1.cleaned_data
+                profile = form1.save(commit=False)
+                profile.job =job
+                profile.save()
+
+        # Create a formset from the submitted data
+        steel_formset = steel_FormSet(request.POST, request.FILES)
+
+        if form1.is_valid() and steel_formset.is_valid():
+           report = form1.save(commit=False)
+           report.save()
+           for form in steel_formset.forms:
+                steel = form.save(commit=False)
+                steel.Report_id = report
+                steel.ip_address = request.META['REMOTE_ADDR']
+                steel.save()
+
+           #return HttpResponseRedirect('thanks') # Redirect to a 'success' page
+           return HttpResponseRedirect(reverse('Auto.report.views.result_steel'))
+    else:
+        report_form = ReportForm()
+        steel_formset = steel_FormSet()
+
+    # For CSRF protection
+    c = {'report_form': report_form,
+         'steel_formset': steel_formset,
+        }
+    c.update(csrf(request))
+    return render_to_response('report/index.html', c)
+
+def result_steel(request):
+        Id = Steel.objects.aggregate(Max('Report_id'))
+        ID = Id['Report_id__max']
+        st  = Steel.objects.filter(Report_id = ID)
+        Id = Report.objects.aggregate(Max('id'))
+        ID = Id['id__max']
+        Head = Report.objects.filter(id = ID)
+        organisation = Organisation.objects.all().filter(id = 1)
+        return render_to_response('report/steel.html', {'st': st, 'Head':Head, 'organisation':organisation,},context_instance=RequestContext(request))
+ 

@@ -73,7 +73,7 @@ def myview(request):
 	ID = Id['id__max']
 	Head = Report.objects.filter(id = ID)
 	organisation = Organisation.objects.all().filter(id = 1)
-	#return render_to_response('report/cube.html', {'cubee':cubee, 'Head':Head, 		'organisation':organisation},context_instance=RequestContext(request))
+	#return render_to_response('report/cube.html', {'cubee':cubee, 'Head':Head,'organisation':organisation},context_instance=RequestContext(request))
 
     	return render_to_pdf('report/pdf.html',{'pagesize':'A4','cubee':cubee, 'Head':Head,'organisation':organisation,
                 #'mylist': results,

@@ -3,6 +3,7 @@
 
 This file is like the configuration file for the Software. The connectivity of Database with Software is done here. 
 """
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -15,9 +16,9 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'tcc_auto',                      # Or path to database file if using sqlite3.
-        'USER': 'root',                      # Not used with sqlite3.
-        'PASSWORD': 'a',
+        'NAME': 'sandeep',                      # Or path to database file if using sqlite3.
+        'USER': 'sandeep',                      # Not used with sqlite3.
+        'PASSWORD': 'djangosql',
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -46,7 +47,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'tccludhiana@gmail.com'
 EMAIL_HOST_PASSWORD = 'tcc@gndec'
 EMAIL_USE_TLS = True 
-EMAIL_PORT = "587"
+EMAIL_PORT = 587
 
 SESSION_KEY = '_auth_user_id'
 BACKEND_SESSION_KEY = '_auth_user_backend'
@@ -60,10 +61,12 @@ USE_L10N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = '/usr/local/lib/python2.7/dist-packages/django/contrib/admin/media/'
+#MEDIA_ROOT = '/usr/local/lib/python2.7/dist-packages/django/contrib/admin/media/'
+MEDIA_ROOT = '/home/sandy/public_html/media/'
+
 STATIC_ROOT = '/home/sandy/Auto/static/'
 
-LOCAL_URL = 'http://localhost/'
+LOCAL_URL = 'http://202.164.53.122/'
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
@@ -133,7 +136,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'registration',
     'Auto.tcc',
-   
+    'Auto.report',
     'tagging',
 )
 
